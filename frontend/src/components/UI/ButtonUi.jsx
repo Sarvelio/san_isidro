@@ -3,20 +3,28 @@ import React from "react";
 export default function ButtonUi({
   type = "submit",
   className = "",
+  color="",
   processing,
   children,
+  onClick,
+  btn,
+  minWidth=150,
 }) {
   return (
     <button
-      type={type}
-      className={
-        `inline-flex items-center px-4 py-2 bg-gray-900 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest active:bg-gray-900 transition ease-in-out duration-150 ${
-          processing && "opacity-25"
-        } ` + className
-      }
-      disabled={processing}
+    style={{ minWidth }}
+    className="relative inline-block px-4 py-2 font-medium group"
+  >
+    <span className={
+    `absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-${color} group-hover:-translate-x-0 group-hover:-translate-y-0`}
+    ></span>
+    <span className={`absolute inset-0 w-full h-full bg-white border-2 border-${color} group-hover:bg-${color}`}></span>
+    <span
+      className={`relative text-${color} group-hover:text-white`}
+      
     >
       {children}
-    </button>
+    </span>
+  </button>
   );
 }
