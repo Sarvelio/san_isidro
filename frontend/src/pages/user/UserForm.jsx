@@ -117,15 +117,15 @@ export default function UserForm({ onSubmit, initialValues = {}, isUpdating }) {
       <div className=" grid gap-2 sm:block text-center">
         <div className="mx-2 mt-16 md:px-4 md:inline-block contents">
           <button
-            class="relative inline-block px-4 py-2 font-medium group"
+            className="relative inline-block px-4 py-2 font-medium group"
             onClick={() => {
               console.log("enviando datos");
             }}
           >
-            <span class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-cyan-600 group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
-            <span class="absolute inset-0 w-full h-full bg-white border-2 border-cyan-600 group-hover:bg-cyan-600"></span>
+            <span className="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-cyan-600 group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
+            <span className="absolute inset-0 w-full h-full bg-white border-2 border-cyan-600 group-hover:bg-cyan-600"></span>
             <span
-              class="relative text-cyan-600 group-hover:text-white"
+              className="relative text-cyan-600 group-hover:text-white"
               style={{ minWidth: 150 }}
             >
               Salir
