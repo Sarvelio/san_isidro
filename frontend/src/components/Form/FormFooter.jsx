@@ -1,30 +1,15 @@
 import React from "react";
 import ButtonUi from "../UI";
-import { Link as RouterLink } from "react-router-dom";
-import { useForm } from "react-hook-form";
-
-export default function FormFooter({
+const FormFooter = ({
   errorData,
   editar,
   loadingCUD,
   _navigateTo,
   setOpen,
   onlyRead = false,
-
-
-  onSubmit, initialValues = {}, isUpdating
-}) {
-  const {
-    handleSubmit,
-    watch,
-    formState: { errors },
-    control,
-    reset,
-  } = useForm();
-
+}) => {
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-
+    <>
       {errorData && (
         <div className="alert alert-danger mt-2 mb-0" role="alert">
           {errorData}
@@ -42,33 +27,30 @@ export default function FormFooter({
           Eliminar registro
         </button>
       )}
-      <div className="flex items-center justify-center gap-10">
-        <ButtonUi
-            component={RouterLink}
-            variant="contained"
-            to="/user"
+      <div className=" grid gap-2 sm:block text-center">
 
-          // className="btn btn-secondary mx-sm-2 mt-2 px-4 "
-          // type="button"
-          // disabled={loadingCUD}
-          // style={{ minWidth: 150 }}
-          // onClick={_navigateTo}
-          color="orange-600"
+      <div className="flex items-center justify-center gap-8">
+        <ButtonUi
+          type="button"
+          disabled={loadingCUD}
+          onClick={_navigateTo}
+          button="secondary"
         >
           {onlyRead ? "Salir" : "Cancelar"}
         </ButtonUi>
         {!onlyRead && (
           <ButtonUi
-            className="btn btn-warning mx-sm-2 mt-2 px-4 "
             type="submit"
             disabled={loadingCUD}
-            style={{ minWidth: 150 }}
-            color="cyan-600"
+          button="primary"
           >
             {editar ? "Editar" : "Guardar"}
+            
           </ButtonUi>
         )}
-      </div>
-      </form>
+      </div></div>
+    </>
   );
 };
+
+export default FormFooter;

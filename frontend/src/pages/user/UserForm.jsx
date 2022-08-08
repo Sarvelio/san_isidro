@@ -190,34 +190,33 @@ export default function UserForm({ onSubmit, initialValues = {}, isUpdating }) {
 
       <br />
       <br />
-      <FormFooter />
+      {/* <FormFooter /> */}
       {/* <div className="flex items-center justify-center">
         <div className="flex gap-x-4">
-          <ButtonUi color="red-600">Red</ButtonUi>
-          <ButtonUi color="orange-600">Green</ButtonUi>
-          <ButtonUi color="cyan-600">Cyan</ButtonUi>
+          <ButtonUi button="primary">Red</ButtonUi>
+          <ButtonUi button="secondary">Green</ButtonUi>
+          <ButtonUi button="danger">Cyan</ButtonUi>
          
         </div>
       </div> */}
 
-     
+     <FormFooter/>
       <div className=" grid gap-2 sm:block text-center">
         <div className="mx-2 mt-16 md:px-4 md:inline-block contents">
-          <ButtonUi
+        <Button
             component={RouterLink}
             variant="contained"
-            type="button"
+            color="secondary"
             to="/user"
-          color="orange-600"
           >
             Cancelar
-          </ButtonUi>
+          </Button>
         </div>
         
         <div className="mx-2 mt-16 md:px-4 md:inline-block contents">
-          <ButtonUi variant="contained" type="submit" color="cyan-600">
+          <Button variant="contained" type="submit">
             {isUpdating ? "Actualizar" : "Guardar"}
-          </ButtonUi>
+          </Button>
         </div>
       </div>
      
