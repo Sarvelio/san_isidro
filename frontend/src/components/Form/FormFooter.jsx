@@ -1,13 +1,5 @@
 import React from "react";
-interface IProps {
-  errorData: string;
-  editar: boolean;
-  setOpen: any;
-  loadingCUD: boolean;
-  _navigateTo: () => void;
-  onlyRead?: boolean;
-}
-
+import ButtonUi from "../UI";
 const FormFooter = ({
   errorData,
   editar,
@@ -15,7 +7,7 @@ const FormFooter = ({
   _navigateTo,
   setOpen,
   onlyRead = false,
-}: IProps) => {
+}) => {
   return (
     <>
       {errorData && (
@@ -35,27 +27,28 @@ const FormFooter = ({
           Eliminar registro
         </button>
       )}
-      <div className="d-grid gap-2 d-sm-block text-center">
-        <button
-          className="btn btn-secondary mx-sm-2 mt-2 px-4 "
+      <div className=" grid gap-2 sm:block text-center">
+
+      <div className="flex items-center justify-center gap-8">
+        <ButtonUi
           type="button"
           disabled={loadingCUD}
-          style={{ minWidth: 150 }}
           onClick={_navigateTo}
+          button="secondary"
         >
           {onlyRead ? "Salir" : "Cancelar"}
-        </button>
+        </ButtonUi>
         {!onlyRead && (
-          <button
-            className="btn btn-warning mx-sm-2 mt-2 px-4 "
+          <ButtonUi
             type="submit"
             disabled={loadingCUD}
-            style={{ minWidth: 150 }}
+          button="primary"
           >
             {editar ? "Editar" : "Guardar"}
-          </button>
+            
+          </ButtonUi>
         )}
-      </div>
+      </div></div>
     </>
   );
 };

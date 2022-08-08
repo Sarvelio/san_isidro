@@ -21,9 +21,10 @@ import {
 import ButtonUi from "../../components/UI";
 import {
   InputMasterField,
-  InputSelectField,
   InputTextField,
+  InputSelectField,
 } from "../../components/Input";
+import FormFooter from "../../components/Form/FormFooter";
 
 export default function UserForm({ onSubmit, initialValues = {}, isUpdating }) {
   const {
@@ -107,16 +108,11 @@ export default function UserForm({ onSubmit, initialValues = {}, isUpdating }) {
 
       <br />
       <br />
-
-      <div className="flex items-center justify-center h-screen">
+      {/* <div className="flex items-center justify-center">
         <div className="flex gap-x-4">
-          <ButtonUi>Button</ButtonUi>
-          <ButtonUi className="bg-red-600">Button</ButtonUi>
-          <ButtonUi className="bg-green-600">Button</ButtonUi>
-          <ButtonUi className="bg-purple-600">Button</ButtonUi>
-          <ButtonUi className="bg-cyan-600">Button</ButtonUi>
-        </div>
-      </div>
+          <ButtonUi button="primary">Red</ButtonUi>
+          <ButtonUi button="secondary">Green</ButtonUi>
+          <ButtonUi button="danger">Cyan</ButtonUi> */}
 
       <div className=" grid gap-2 sm:block text-center">
         <div className="mx-2 mt-16 md:px-4 md:inline-block contents">
@@ -143,16 +139,8 @@ export default function UserForm({ onSubmit, initialValues = {}, isUpdating }) {
         </div>
       </div>
 
+      <FormFooter />
       <div className=" grid gap-2 sm:block text-center">
-        {/* <button
-          className="btn btn-secondary "
-          type="button"
-          // disabled={loadingCUD}
-          style={{ minWidth: 150 }}
-          // onClick={_navigateTo}
-        >
-          Cancelar
-        </button> */}
         <div className="mx-2 mt-16 md:px-4 md:inline-block contents">
           <Button
             component={RouterLink}
@@ -163,14 +151,6 @@ export default function UserForm({ onSubmit, initialValues = {}, isUpdating }) {
             Cancelar
           </Button>
         </div>
-        {/* <button
-          className="btn btn-warning  "
-          type="submit"
-          // disabled={loadingCUD}
-          style={{ minWidth: 150 }}
-        >
-          Guardar
-        </button> */}
 
         <div className="mx-2 mt-16 md:px-4 md:inline-block contents">
           <Button variant="contained" type="submit">
@@ -178,24 +158,7 @@ export default function UserForm({ onSubmit, initialValues = {}, isUpdating }) {
           </Button>
         </div>
       </div>
-      {/*       
-      <div className="flex ">
-        <div className="mr-auto">
-          <Button
-            component={RouterLink}
-            variant="contained"
-            color="secondary"
-            to="/user"
-          >
-            Regresar
-          </Button>
-        </div>
-        <div className="flex justify-end">
-          <Button variant="contained" type="submit">
-            {isUpdating ? "Actualizar" : "Registrar"}
-          </Button>
-        </div>
-      </div> */}
+
       <br />
     </form>
   );
