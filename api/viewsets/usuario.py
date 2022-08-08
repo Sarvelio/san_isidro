@@ -7,15 +7,15 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
 
 # Models
-from api.models import Parent
+from api.models import Usuario
 
 # Serializer
-from api.serializers import ParentBaseSerializer, ParentReadSerializer, ParentSaveSerializer
+from api.serializers import UsuarioBaseSerializer, UsuarioReadSerializer, UsuarioSaveSerializer
 
 
-class ParentViewSet(viewsets.ModelViewSet):
-    serializer_class = ParentReadSerializer
-    queryset = Parent.objects.filter(active=True)
+class UsuarioViewSet(viewsets.ModelViewSet):
+    serializer_class = UsuarioReadSerializer
+    queryset = Usuario.objects.filter(active=True)
 
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
@@ -27,11 +27,11 @@ class ParentViewSet(viewsets.ModelViewSet):
         """Define serializer for API"""
         async_options = self.request.query_params.get('async_options', False)
         if async_options:
-            return ParentBaseSerializer
+            return UsuarioBaseSerializer
         if self.action == 'list' or self.action == 'retrieve':
-            return ParentReadSerializer
+            return UsuarioReadSerializer
         else:
-            return ParentSaveSerializer
+            return UsuarioSaveSerializer
 
     def create(self, request, *args, **kwargs):
         user = request.user.id

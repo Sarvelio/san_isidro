@@ -11,7 +11,7 @@ router.register(r'department', viewsets.DepartmentViewSet)
 router.register(r'city', viewsets.CityViewSet)
 router.register(r'beneficiary', viewsets.BeneficiaryViewSet)
 router.register(r'sponsor', viewsets.SponsorViewSet)
-router.register(r'parent', viewsets.ParentViewSet)
+router.register(r'usuario', viewsets.UsuarioViewSet)
 router.register(r'sector', viewsets.SectorViewSet)
 
 urlpatterns = [

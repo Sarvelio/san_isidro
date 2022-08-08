@@ -8,10 +8,10 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
 
 # Models
-from api.models import Beneficiary, ParentRel
+from api.models import Beneficiary
 
 # Serializer
-from api.serializers import BeneficiaryBaseSerializer, BeneficiaryReadSerializer, BeneficiarySaveSerializer, parent
+from api.serializers import BeneficiaryBaseSerializer, BeneficiaryReadSerializer, BeneficiarySaveSerializer
 
 #others
 import json

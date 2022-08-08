@@ -6,5 +6,5 @@ from .city import CityViewSet
 from .department import DepartmentViewSet
 from .beneficiary import BeneficiaryViewSet
 from .sponsor import SponsorViewSet
-from .parent import ParentViewSet
+from .usuario import UsuarioViewSet
 from .sector import SectorViewSet
