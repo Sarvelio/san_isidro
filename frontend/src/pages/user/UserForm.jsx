@@ -19,10 +19,16 @@ import {
   password,
 } from "../../validations";
 import ButtonUi from "../../components/UI";
+import {
+  InputMasterField,
+  InputTextField,
+  InputSelectField,
+} from "../../components/Input";
 import FormFooter from "../../components/Form/FormFooter";
 
 export default function UserForm({ onSubmit, initialValues = {}, isUpdating }) {
   const {
+    register,
     handleSubmit,
     watch,
     formState: { errors },
@@ -39,171 +45,104 @@ export default function UserForm({ onSubmit, initialValues = {}, isUpdating }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2 className="">Datos Personales</h2>
-      {/* <TitleUnderline title="Datos Personales " /> */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-6 md:gap-x-20 mt-4">
-        <div>
-          <label htmlFor="test" className="label">
-            Nombre
-          </label>
-          <InputText
-            control={control}
-            name="first_name"
-            rules={{ validate: required }}
-            placeholder={"Ingrese nombre"}
-          />
-        </div>
+        {[
+          { name: "first_name", label: "Nombre", validations: ["required"] },
+          { name: "last_name", label: "Apellido", validations: ["required"] },
+          {
+            name: "gender",
+            label: "Género",
+            validations: ["required"],
+            options: [
+              { value: 1, label: "Hombre" },
+              { value: 2, label: "Mujer" },
+            ],
+          },
+        ].map(({ name, label, validations }) => {
+          return (
+            <InputMasterField
+              name={name}
+              title={label}
+              key={name}
+              control={control}
+              validations={validations}
+            />
+          );
+        })}
 
-        <div>
-          <label htmlFor="test" className="label">
-            Apellido
-          </label>
-          <div className="control">
-            <InputText
+        {[
+          { name: "first_name", label: "Nombre", validations: ["required"] },
+          { name: "last_name", label: "Apellido", validations: ["required"] },
+        ].map(({ name, label, validations }) => {
+          return (
+            <InputTextField
+              name={name}
+              title={label}
+              key={name}
               control={control}
-              name="last_name"
-              rules={{ validate: required }}
-              placeholder={"Ingrese apellido"}
+              validations={validations}
             />
-          </div>
-        </div>
-        {/* <div>
-          <label htmlFor="test" className="label">
-            Fecha de Nacimiento
-          </label>
-          <div className="control">
-            <InputDate
-              control={control}
-              name="birthday"
-              rules={{ validate: composeValidators(required, date) }}
-            />
-          </div>
-        </div> */}
-        {/* <div>
-          <label htmlFor="test" className="label">
-            Genero
-          </label>
-          <div className="control">
-            <InputSelect
-              control={control}
-              name="gender"
-              rules={{ validate: required }}
-              placeholder="Seleccione genero"
-              options={[
-                { value: 1, label: "Hombre" },
-                { value: 2, label: "Mujer" },
-              ]}
-            />
-          </div>
-        </div> */}
+          );
+        })}
+
+        <InputSelectField
+          name="gender"
+          title="Género"
+          control={control}
+          validations={["required"]}
+          options={[
+            { value: 1, label: "Hombre" },
+            { value: 2, label: "Mujer" },
+          ]}
+        />
+
+        <InputTextField
+          name="email"
+          title="Correo"
+          type="text"
+          control={control}
+          validations={["required", "email"]}
+        />
       </div>
       <br />
-      {/* <TitleUnderline title="Datos de Sistema" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-6 md:gap-x-20 mt-4">
-        <div>
-          <label htmlFor="test" className="label">
-            Nombre de usuario
-          </label>
-          <div className="control">
-            <InputText
-              control={control}
-              name="username"
-              rules={{ validate: composeValidators(required, alphanumeric) }}
-              type="text"
-              placeholder="Ingrese nombre de usuario"
-            />
-          </div>
-        </div>
-        <div>
-          <label htmlFor="test" className="label">
-            Rol de usuario
-          </label>
-          <div className="control">
-            <InputAsyncSelect
-              control={control}
-              loadOptions={asyncOptions}
-              isSearchable={true}
-              valueKey="id"
-              labelKey="name"
-              name="rol"
-              rules={{ validate: required }}
-              placeholder="Seleccione rol"
-            />
-          </div>
-        </div>
-        <div>
-          <label htmlFor="email" className="label">
-            Correo
-          </label>
-          <InputText
-            control={control}
-            name="email"
-            rules={{ validate: composeValidators(required, email) }}
-            placeholder={"Ingrese Correo"}
-            type="email"
-          />
-        </div>
-        <div>
-          <label htmlFor="test" className="label">
-            Estado del usuario
-          </label>
-          <div className="control">
-            <InputSelect
-              control={control}
-              name="status"
-              rules={{ validate: required }}
-              placeholder="Seleccione estado"
-              options={[
-                { value: 1, label: "Activo" },
-                { value: 3, label: "Inactivo" },
-              ]}
-            />
-          </div>
-        </div>
-        {isUpdating ? (
-          <div>
-            <label htmlFor="test" className="label">
-              Contraseña
-            </label>
-            <InputText
-              control={control}
-              name="password"
-              rules={{ validate: password }}
-              placeholder="Ingrese contraseña"
-              type="password"
-            />
-          </div>
-        ) : (
-          <div>
-            <label htmlFor="test" className="label">
-              Contraseña
-            </label>
-            <InputText
-              control={control}
-              name="password"
-              rules={{ validate: composeValidators(required, password) }}
-              placeholder="Ingrese contraseña"
-              type="password"
-            />
-          </div>
-        )}
-      </div> */}
 
       <br />
       <br />
-      {/* <FormFooter /> */}
       {/* <div className="flex items-center justify-center">
         <div className="flex gap-x-4">
           <ButtonUi button="primary">Red</ButtonUi>
           <ButtonUi button="secondary">Green</ButtonUi>
-          <ButtonUi button="danger">Cyan</ButtonUi>
-         
-        </div>
-      </div> */}
+          <ButtonUi button="danger">Cyan</ButtonUi> */}
 
-     <FormFooter/>
       <div className=" grid gap-2 sm:block text-center">
         <div className="mx-2 mt-16 md:px-4 md:inline-block contents">
-        <Button
+          <button
+            class="relative inline-block px-4 py-2 font-medium group"
+            onClick={() => {
+              console.log("enviando datos");
+            }}
+          >
+            <span class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-cyan-600 group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
+            <span class="absolute inset-0 w-full h-full bg-white border-2 border-cyan-600 group-hover:bg-cyan-600"></span>
+            <span
+              class="relative text-cyan-600 group-hover:text-white"
+              style={{ minWidth: 150 }}
+            >
+              Salir
+            </span>
+          </button>
+        </div>
+        <div className="mx-2 mt-16 md:px-4 md:inline-block contents">
+          <Button variant="contained" type="submit">
+            {isUpdating ? "Actualizar" : "Guardar"}
+          </Button>
+        </div>
+      </div>
+
+      <FormFooter />
+      <div className=" grid gap-2 sm:block text-center">
+        <div className="mx-2 mt-16 md:px-4 md:inline-block contents">
+          <Button
             component={RouterLink}
             variant="contained"
             color="secondary"
@@ -212,14 +151,14 @@ export default function UserForm({ onSubmit, initialValues = {}, isUpdating }) {
             Cancelar
           </Button>
         </div>
-        
+
         <div className="mx-2 mt-16 md:px-4 md:inline-block contents">
           <Button variant="contained" type="submit">
             {isUpdating ? "Actualizar" : "Guardar"}
           </Button>
         </div>
       </div>
-     
+
       <br />
     </form>
   );
