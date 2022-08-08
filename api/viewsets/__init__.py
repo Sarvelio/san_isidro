@@ -7,3 +7,4 @@ from .department import DepartmentViewSet
 from .beneficiary import BeneficiaryViewSet
 from .sponsor import SponsorViewSet
 from .parent import ParentViewSet
+from .sector import SectorViewSet

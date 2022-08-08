@@ -8,3 +8,4 @@ from .department import DepartmentBaseSerializer
 from .beneficiary import BeneficiaryBaseSerializer, BeneficiaryReadSerializer, BeneficiarySaveSerializer
 from .sponsor import SponsorBaseSerializer, SponsorReadSerializer, SponsorSaveSerializer
 from .parent import ParentBaseSerializer, ParentReadSerializer, ParentSaveSerializer
+from .sector import SectorBaseSerializer, SectorReadSerializer, SectorSaveSerializer

@@ -12,3 +12,4 @@ from .movement import Movement
 from .project_beneficiary import ProjectBeneficiary
 from .file import File
 from .parent import Parent, ParentRel
+from .sector import Sector

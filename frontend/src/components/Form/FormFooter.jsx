@@ -36,7 +36,7 @@ const FormFooter = ({
           onClick={_navigateTo}
           button="secondary"
         >
-          {onlyRead ? "Salir" : "Cancelar"}
+          {onlyRead ? "Salir" : "Cancelarrrrrrrr"}
         </ButtonUi>
         {!onlyRead && (
           <ButtonUi
