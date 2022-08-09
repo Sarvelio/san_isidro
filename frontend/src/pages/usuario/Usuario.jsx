@@ -14,6 +14,10 @@ export default function Usuario() {
 
   const onSubmit = async (data) => {
     const body = { ...data };
+    delete body.sector;
+    if (_.get(data, "sector.id", undefined) !== undefined) {
+      body.sector = data.sector.id;
+    }
     if (!update) saveData(body);
     else updateData(body);
   };

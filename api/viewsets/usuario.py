@@ -19,9 +19,9 @@ class UsuarioViewSet(viewsets.ModelViewSet):
 
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
-    filter_fields = ("name",)
-    search_fields = ("name",)
-    ordering_fields = ("id", "name")
+    filter_fields = ("nombre",)
+    search_fields = ("nombre",)
+    ordering_fields = ("id", "nombre")
 
     def get_serializer_class(self):
         """Define serializer for API"""

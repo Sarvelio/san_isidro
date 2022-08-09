@@ -52,7 +52,13 @@ export default function SideBar({ className }) {
               Icon={() => <HomeIcon />}
               location={location}
             />
-
+            <MenuItem
+              title="Usuarios 2"
+              to="/usuario"
+              Icon={() => <ConstructionIcon />}
+              user={user}
+              location={location}
+            />
             <MenuItem
               title="Usuarios"
               to="/user"
@@ -102,15 +108,7 @@ export default function SideBar({ className }) {
               user={user}
               location={location}
             />
-            <MenuItem
-              title="Usuarios"
-              to="/usuario"
-              Icon={() => <ConstructionIcon />}
-              user={user}
-              location={location}
-            />
-            <br />
-            <br />
+            
             <br />
             <li className="menu-item my-2 mt-36" onClick={() => {}}>
               <div className="menu-link  text-red-600" onClick={logOut}>
