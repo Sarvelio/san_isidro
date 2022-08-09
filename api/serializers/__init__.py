@@ -9,3 +9,4 @@ from .beneficiary import BeneficiaryBaseSerializer, BeneficiaryReadSerializer, B
 from .sponsor import SponsorBaseSerializer, SponsorReadSerializer, SponsorSaveSerializer
 from .usuario import UsuarioBaseSerializer, UsuarioReadSerializer, UsuarioSaveSerializer
 from .sector import SectorBaseSerializer, SectorReadSerializer, SectorSaveSerializer
+from .configuracion import ConfiguracionBaseSerializer, ConfiguracionReadSerializer, ConfiguracionSaveSerializer

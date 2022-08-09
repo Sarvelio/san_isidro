@@ -41,7 +41,7 @@ export default function SideBar({ className }) {
         id="sidebar"
         className={`${className || ""} sidebar-container pt-5`}
       >
-        <div className="menu mt-4 w-full">
+        <div className="menu mt-2 w-full">
           <ul className="p-0 pb-16">
             <br />
             <br />
@@ -108,8 +108,14 @@ export default function SideBar({ className }) {
               user={user}
               location={location}
             />
+            <MenuItem
+              title="Configuracion"
+              to="/configuracion"
+              Icon={() => <ConstructionIcon />}
+              user={user}
+              location={location}
+            />
             
-            <br />
             <li className="menu-item my-2 mt-36" onClick={() => {}}>
               <div className="menu-link  text-red-600" onClick={logOut}>
                 <DoorBackIcon />

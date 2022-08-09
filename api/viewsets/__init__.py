@@ -8,3 +8,4 @@ from .beneficiary import BeneficiaryViewSet
 from .sponsor import SponsorViewSet
 from .usuario import UsuarioViewSet
 from .sector import SectorViewSet
+from .configuracion import ConfiguracionViewSet

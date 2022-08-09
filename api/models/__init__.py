@@ -13,3 +13,4 @@ from .project_beneficiary import ProjectBeneficiary
 from .file import File
 from .usuario import Usuario
 from .sector import Sector
+from .configuracion import Configuracion

@@ -13,6 +13,7 @@ router.register(r'beneficiary', viewsets.BeneficiaryViewSet)
 router.register(r'sponsor', viewsets.SponsorViewSet)
 router.register(r'usuario', viewsets.UsuarioViewSet)
 router.register(r'sector', viewsets.SectorViewSet)
+router.register(r'configuracion', viewsets.ConfiguracionViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
