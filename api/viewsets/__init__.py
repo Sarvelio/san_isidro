@@ -9,3 +9,4 @@ from .sponsor import SponsorViewSet
 from .usuario import UsuarioViewSet
 from .sector import SectorViewSet
 from .configuracion import ConfiguracionViewSet
+from .proyecto import ProyectoViewSet

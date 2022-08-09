@@ -14,3 +14,4 @@ from .file import File
 from .usuario import Usuario
 from .sector import Sector
 from .configuracion import Configuracion
+from .proyecto import Proyecto

@@ -18,6 +18,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import SectorRoutes from "./sector";
 import UsuarioRoutes from "./usuario";
 import ConfiguracionRoutes from "./configuracion";
+import ProyectoRoutes from "./proyecto";
 
 export default function App() {
   return (
@@ -101,6 +102,14 @@ export default function App() {
           element={
             <PrivateRoute>
               <ConfiguracionRoutes />
+            </PrivateRoute>
+          }
+        />
+         <Route
+          path="/proyecto/*"
+          element={
+            <PrivateRoute>
+              <ProyectoRoutes />
             </PrivateRoute>
           }
         />

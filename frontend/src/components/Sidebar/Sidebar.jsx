@@ -39,9 +39,9 @@ export default function SideBar({ className }) {
     <>
       <aside
         id="sidebar"
-        className={`${className || ""} sidebar-container pt-5`}
+        className={`${className || ""} sidebar-container pt-3`}
       >
-        <div className="menu mt-2 w-full">
+        <div className="menu mt-1 w-full">
           <ul className="p-0 pb-16">
             <br />
             <br />
@@ -115,7 +115,13 @@ export default function SideBar({ className }) {
               user={user}
               location={location}
             />
-            
+            <MenuItem
+              title="Proyecto 2"
+              to="/proyecto"
+              Icon={() => <ConstructionIcon />}
+              user={user}
+              location={location}
+            />
             <li className="menu-item my-2 mt-36" onClick={() => {}}>
               <div className="menu-link  text-red-600" onClick={logOut}>
                 <DoorBackIcon />
