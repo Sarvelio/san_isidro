@@ -54,7 +54,7 @@ export default function SectorForm({
         {[
           { type: "title", title: "Datos del sector" },
           {
-            name: "sectorname",
+            name: "nombre",
             title: "Sector",
             validations: ["required", "alphanumeric"],
           },

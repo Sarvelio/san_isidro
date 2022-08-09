@@ -26,7 +26,7 @@ export default function () {
       },
       {
         Header: "Nombre",
-        accessor: "name",
+        accessor: "nombre",
       },
     ],
     []
