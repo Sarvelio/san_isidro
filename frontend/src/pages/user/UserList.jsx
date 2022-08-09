@@ -7,21 +7,13 @@ import Button from "@mui/material/Button";
 import useList from "../../hooks/useList";
 import useDelete from "../../hooks/useDelete";
 import Search from "../../components/Search/Search";
-import { useDemoData } from "@mui/x-data-grid-generator";
-import { DataGrid, GridToolbar, esES } from "@mui/x-data-grid";
 
 export default function () {
-  // const { data, page, getData } = useList("user");
-  // const { deleteData } = useDelete("user");
-  // const [search, setSearch] = useState(null);
-  // const loading = useSelector((state) => state.loading.loading);
-  // const navigate = useNavigate();
-
-  const { data, loading } = useDemoData({
-    dataSet: "Commodity",
-    rowLength: 4,
-    maxColumns: 6,
-  });
+  const { data, page, getData } = useList("user");
+  const { deleteData } = useDelete("user");
+  const [search, setSearch] = useState(null);
+  const loading = useSelector((state) => state.loading.loading);
+  const navigate = useNavigate();
 
   const columns = useMemo(
     () => [
@@ -53,27 +45,29 @@ export default function () {
       <div className="flex mb-2 sm:mb-0">
         <h1 className="text-title">Usuarios</h1>
       </div>
-      <div className="flex justify-end">
-        <Button
-          component={RouterLink}
-          disableElevation
-          variant="contained"
-          to="/user/create"
-        >
-          Agregar
-        </Button>
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-20 mt-4">
+        <Search
+          className="w-full"
+          onSearch={(value) => {
+            getData(1, {
+              search: value,
+            }).then();
+            setSearch(value);
+          }}
+        />
+        <div className="flex justify-start sm:justify-end">
+          <Button
+            component={RouterLink}
+            disableElevation
+            variant="contained"
+            to="/user/create"
+          >
+            Agregar
+          </Button>
+        </div>
       </div>
       <br />
-      <div style={{ height: "750px" }}>
-        <DataGrid
-          {...data}
-          localeText={esES.components.MuiDataGrid.defaultProps.localeText}
-          loading={loading}
-          components={{ Toolbar: GridToolbar }}
-        />
-      </div>
-
-      {/* <LoadMask>
+      <LoadMask>
         <Table
           columns={columns}
           data={data.results}
@@ -82,7 +76,7 @@ export default function () {
           currentPage={page}
           onPageChange={(page) => getData(page, { search: search })}
         />
-      </LoadMask> */}
+      </LoadMask>
     </>
   );
 }

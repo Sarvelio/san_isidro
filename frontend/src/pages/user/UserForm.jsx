@@ -114,6 +114,35 @@ export default function UserForm({
             />
           );
         })}
+        <div className="w-full sm:w-1/2 px-2 sm:px-6 py-1 ">
+          {isUpdating ? (
+            <div>
+              <label htmlFor="test" className="label">
+                Contraseña
+              </label>
+              <InputText
+                control={control}
+                name="password"
+                rules={{ validate: password }}
+                placeholder="Ingrese contraseña"
+                type="password"
+              />
+            </div>
+          ) : (
+            <div>
+              <label htmlFor="test" className="label">
+                Contraseña
+              </label>
+              <InputText
+                control={control}
+                name="password"
+                rules={{ validate: composeValidators(required, password) }}
+                placeholder="Ingrese contraseña"
+                type="password"
+              />
+            </div>
+          )}
+        </div>
       </div>
       <FormFooter {...{ loading, isUpdating, urlList }} />
       <br />
