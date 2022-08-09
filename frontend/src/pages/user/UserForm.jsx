@@ -50,9 +50,9 @@ export default function UserForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h2 className="">Datos Personales</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-6 md:gap-x-20 mt-4">
+      <div className="w-full flex flex-wrap">
         {[
+          { type: "title", title: "Datos Personales" },
           { name: "first_name", title: "Nombre" },
           { name: "last_name", title: "Apellido" },
           { name: "birthday", title: "Fecha de Nacimiento", type: "date" },
@@ -64,14 +64,29 @@ export default function UserForm({
               { value: 2, label: "Mujer" },
             ],
           },
-        ].map((props) => {
-          return (
-            <InputMasterField key={props.name} control={control} {...props} />
-          );
-        })}
-
-        <h3>Datos del sistema</h3>
-        {[
+          {
+            component: (
+              <div className="w-full sm:w-1/2 px-2 sm:px-6">
+                <div>
+                  <label htmlFor="test" className="label">
+                    Rol de usuario
+                  </label>
+                  <div className="control">
+                    <InputAsyncSelect
+                      control={control}
+                      loadOptions={asyncOptions}
+                      isSearchable={true}
+                      valueKey="id"
+                      labelKey="name"
+                      name="rol"
+                      rules={{ validate: required }}
+                      placeholder="Seleccione rol"
+                    />
+                  </div>
+                </div>
+              </div>
+            ),
+          },
           {
             name: "username",
             title: "Nombre de usuario",
@@ -90,29 +105,15 @@ export default function UserForm({
               { value: 3, label: "Inactivo" },
             ],
           },
-        ].map((props) => {
+        ].map((props, index) => {
           return (
-            <InputMasterField key={props.name} control={control} {...props} />
+            <InputMasterField
+              key={props.name || index}
+              control={control}
+              {...props}
+            />
           );
         })}
-
-        <div>
-          <label htmlFor="test" className="label">
-            Rol de usuario
-          </label>
-          <div className="control">
-            <InputAsyncSelect
-              control={control}
-              loadOptions={asyncOptions}
-              isSearchable={true}
-              valueKey="id"
-              labelKey="name"
-              name="rol"
-              rules={{ validate: required }}
-              placeholder="Seleccione rol"
-            />
-          </div>
-        </div>
       </div>
       <FormFooter {...{ loading, isUpdating, urlList }} />
       <br />

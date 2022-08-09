@@ -12,16 +12,23 @@ const InputMasterField = ({
   validations = ["required"],
   type = "text",
   options = [],
+  component = false,
 }) => {
-  if (options && options.length > 0) {
+  if (component) {
+    return component;
+  } else if (type === "title") {
+    return <h3 className="w-full mt-8 mb-2">{title}</h3>;
+  } else if (options && options.length > 0) {
     return (
-      <InputSelectField
-        name={name}
-        title={title}
-        control={control}
-        validations={validations}
-        options={options}
-      />
+      <div className="w-full sm:w-1/2 px-2 sm:px-6 py-1 ">
+        <InputSelectField
+          name={name}
+          title={title}
+          control={control}
+          validations={validations}
+          options={options}
+        />
+      </div>
     );
   } else if (["text", "email", "password"].includes(type)) {
     if (type === "email") {
@@ -29,16 +36,22 @@ const InputMasterField = ({
       type = "text";
     }
     return (
-      <InputTextField
-        name={name}
-        title={title}
-        control={control}
-        type={type}
-        validations={validations}
-      />
+      <div className="w-full sm:w-1/2 px-2 sm:px-6 py-1 ">
+        <InputTextField
+          name={name}
+          title={title}
+          control={control}
+          type={type}
+          validations={validations}
+        />
+      </div>
     );
   } else if (type === "date") {
-    return <InputDateField name={name} title={title} control={control} />;
+    return (
+      <div className="w-full sm:w-1/2 px-2 sm:px-6 py-1 ">
+        <InputDateField name={name} title={title} control={control} />
+      </div>
+    );
   }
   return (
     <label htmlFor="" className="label">
