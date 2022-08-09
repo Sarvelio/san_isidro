@@ -7,8 +7,9 @@ import { useSelector } from "react-redux";
 import _ from "lodash";
 
 export default function User() {
-  const { saveData } = useCreate("user", "/user");
-  const { data, updateData, update } = useUpdate("user", "/user");
+  const urlList = "/user";
+  const { saveData } = useCreate("user", urlList);
+  const { data, updateData, update } = useUpdate("user", urlList);
   const loading = useSelector((state) => state.loading.loading);
 
   const onSubmit = async (data) => {
@@ -35,6 +36,8 @@ export default function User() {
           onSubmit={onSubmit}
           initialValues={{ ...data }}
           isUpdating={update}
+          urlList={urlList}
+          loading={loading}
         />
       </LoadMask>
     </>

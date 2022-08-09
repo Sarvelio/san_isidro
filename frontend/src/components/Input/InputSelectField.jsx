@@ -2,22 +2,8 @@ import { TextField } from "@mui/material";
 import { InputSelect } from "../../components/CustomInputs";
 import { Validations } from "./InputValidations";
 
-const InputTextField = ({
-  title,
-  type = "text",
-  props,
-  register,
-  errors,
-  error,
-  helperText,
-  control,
-  key,
-  name,
-  validations,
-  options,
-}) => {
+const InputSelectField = ({ title, control, name, validations, options }) => {
   const rules = Validations(validations);
-  console.log("rules", rules);
   return (
     <div>
       <label htmlFor="test" className="label">
@@ -35,4 +21,4 @@ const InputTextField = ({
     </div>
   );
 };
-export default InputTextField;
+export default InputSelectField;

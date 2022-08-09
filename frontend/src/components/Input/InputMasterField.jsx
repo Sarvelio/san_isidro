@@ -6,21 +6,20 @@ const InputMasterField = ({
   name,
   title,
   control,
-  validations,
+  validations = ["required"],
   type = "text",
   options = [],
 }) => {
-  const rules = Validations(validations);
-  console.log("rules", options.length);
-  if (type === "select" || options.length > 0) {
-    <InputSelectField
-      name={name}
-      title={title}
-      control={control}
-      type="select"
-      validations={validations}
-      options={options}
-    />;
+  if (options && options.length > 0) {
+    return (
+      <InputSelectField
+        name={name}
+        title={title}
+        control={control}
+        validations={validations}
+        options={options}
+      />
+    );
   } else if (["text", "email", "password"].includes(type)) {
     return (
       <InputTextField
@@ -33,8 +32,8 @@ const InputMasterField = ({
     );
   }
   return (
-    <label htmlFor="test" className="label">
-      Tipo no definido
+    <label htmlFor="" className="label">
+      -Tipo no definido-
     </label>
   );
 };

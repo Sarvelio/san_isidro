@@ -1,25 +1,29 @@
 import React from "react";
 import ButtonUi from "../UI";
+import { useNavigate } from "react-router-dom";
+
 const FormFooter = ({
   errorData,
-  editar,
-  loadingCUD,
-  _navigateTo,
+  isUpdating,
+  loading,
+  urlList,
   setOpen,
   onlyRead = false,
 }) => {
+  const navigate = useNavigate();
+
   return (
-    <>
+    <div className="my-4 sm:mt-10">
       {errorData && (
         <div className="alert alert-danger mt-2 mb-0" role="alert">
           {errorData}
         </div>
       )}
-      {!onlyRead && editar && (
+      {!onlyRead && isUpdating && (
         <button
           className="btn btn-outline-danger mx-0 my-2 px-4"
           type="button"
-          disabled={loadingCUD}
+          disabled={loading}
           onClick={() => {
             setOpen(true);
           }}
@@ -27,29 +31,28 @@ const FormFooter = ({
           Eliminar registro
         </button>
       )}
-      <div className=" grid gap-2 sm:block text-center">
-
-      <div className="flex items-center justify-center gap-8">
-        <ButtonUi
-          type="button"
-          disabled={loadingCUD}
-          onClick={_navigateTo}
-          button="secondary"
-        >
-          {onlyRead ? "Salir" : "Cancelar"}
-        </ButtonUi>
-        {!onlyRead && (
+      <div className="grid gap-2 sm:block text-center">
+        <div className="mx-2 sm:px-4 sm:inline-block contents">
           <ButtonUi
-            type="submit"
-            disabled={loadingCUD}
-          button="primary"
+            type="button"
+            disabled={loading}
+            onClick={() => {
+              navigate(urlList);
+            }}
+            button="secondary"
           >
-            {editar ? "Editar" : "Guardar"}
-            
+            Salir
           </ButtonUi>
-        )}
-      </div></div>
-    </>
+        </div>
+        <div className="mx-2 sm:px-4 sm:inline-block contents">
+          {!onlyRead && (
+            <ButtonUi type="submit" disabled={loading} button="primary">
+              {isUpdating ? "Editar" : "Registrar"}
+            </ButtonUi>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 
