@@ -5,13 +5,7 @@ import { Validations } from "./InputValidations";
 const InputTextField = ({
   title,
   type = "text",
-  props,
-  register,
-  errors,
-  error,
-  helperText,
   control,
-  key,
   name,
   validations = [],
 }) => {

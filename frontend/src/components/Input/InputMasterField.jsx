@@ -1,6 +1,9 @@
 import { TextField } from "@mui/material";
-import { InputSelectField, InputTextField } from "../../components/Input";
-import { Validations } from "./InputValidations";
+import {
+  InputSelectField,
+  InputTextField,
+  InputDateField,
+} from "../../components/Input";
 
 const InputMasterField = ({
   name,
@@ -21,6 +24,10 @@ const InputMasterField = ({
       />
     );
   } else if (["text", "email", "password"].includes(type)) {
+    if (type === "email") {
+      validations = ["required", "email"];
+      type = "text";
+    }
     return (
       <InputTextField
         name={name}
@@ -30,6 +37,8 @@ const InputMasterField = ({
         validations={validations}
       />
     );
+  } else if (type === "date") {
+    return <InputDateField name={name} title={title} control={control} />;
   }
   return (
     <label htmlFor="" className="label">

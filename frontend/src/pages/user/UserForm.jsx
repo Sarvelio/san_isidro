@@ -55,6 +55,7 @@ export default function UserForm({
         {[
           { name: "first_name", title: "Nombre" },
           { name: "last_name", title: "Apellido" },
+          { name: "birthday", title: "Fecha de Nacimiento", type: "date" },
           {
             name: "gender",
             title: "Género",
@@ -63,40 +64,57 @@ export default function UserForm({
               { value: 2, label: "Mujer" },
             ],
           },
+        ].map((props) => {
+          return (
+            <InputMasterField key={props.name} control={control} {...props} />
+          );
+        })}
+
+        <h3>Datos del sistema</h3>
+        {[
+          {
+            name: "username",
+            title: "Nombre de usuario",
+            validations: ["required", "alphanumeric"],
+          },
           {
             name: "email",
             title: "Correo",
             type: "email",
-            validations: ["required", "email"],
+          },
+          {
+            name: "status",
+            title: "Estado del usuario",
+            options: [
+              { value: 1, label: "Activo" },
+              { value: 3, label: "Inactivo" },
+            ],
           },
         ].map((props) => {
           return (
             <InputMasterField key={props.name} control={control} {...props} />
           );
         })}
-      </div>
 
+        <div>
+          <label htmlFor="test" className="label">
+            Rol de usuario
+          </label>
+          <div className="control">
+            <InputAsyncSelect
+              control={control}
+              loadOptions={asyncOptions}
+              isSearchable={true}
+              valueKey="id"
+              labelKey="name"
+              name="rol"
+              rules={{ validate: required }}
+              placeholder="Seleccione rol"
+            />
+          </div>
+        </div>
+      </div>
       <FormFooter {...{ loading, isUpdating, urlList }} />
-
-      <div className=" grid gap-2 sm:block text-center">
-        <div className="mx-2 mt-16 md:px-4 md:inline-block contents">
-          <Button
-            component={RouterLink}
-            variant="contained"
-            color="secondary"
-            to="/user"
-          >
-            Cancelar
-          </Button>
-        </div>
-
-        <div className="mx-2 mt-16 md:px-4 md:inline-block contents">
-          <Button variant="contained" type="submit">
-            {isUpdating ? "Actualizar" : "Guardar"}
-          </Button>
-        </div>
-      </div>
-
       <br />
     </form>
   );
