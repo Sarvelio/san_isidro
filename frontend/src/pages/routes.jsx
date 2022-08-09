@@ -15,6 +15,7 @@ import SponsorRoutes from "./sponsor";
 
 // Styles
 import "react-toastify/dist/ReactToastify.min.css";
+import SectorRoutes from "./sector";
 
 export default function App() {
   return (
@@ -74,6 +75,14 @@ export default function App() {
           element={
             <PrivateRoute>
               <ProjectRoutes />
+            </PrivateRoute>
+          }
+        />
+         <Route
+          path="/sector/*"
+          element={
+            <PrivateRoute>
+              <SectorRoutes />
             </PrivateRoute>
           }
         />
