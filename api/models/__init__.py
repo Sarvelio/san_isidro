@@ -11,4 +11,5 @@ from .sponsor import Sponsor
 from .movement import Movement
 from .project_beneficiary import ProjectBeneficiary
 from .file import File
-from .parent import Parent, ParentRel
+from .usuario import Usuario
+from .sector import Sector

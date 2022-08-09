@@ -7,31 +7,31 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
 
 # Models
-from api.models import Parent
+from api.models import Sector
 
 # Serializer
-from api.serializers import ParentBaseSerializer, ParentReadSerializer, ParentSaveSerializer
+from api.serializers import SectorBaseSerializer, SectorReadSerializer, SectorSaveSerializer
 
 
-class ParentViewSet(viewsets.ModelViewSet):
-    serializer_class = ParentReadSerializer
-    queryset = Parent.objects.filter(active=True)
+class SectorViewSet(viewsets.ModelViewSet):
+    serializer_class = SectorReadSerializer
+    queryset = Sector.objects.filter(active=True)
 
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
-    filter_fields = ("name",)
-    search_fields = ("name",)
-    ordering_fields = ("id", "name")
+    filter_fields = ("nombre",)
+    search_fields = ("nombre",)
+    ordering_fields = ("id", "nombre")
 
     def get_serializer_class(self):
         """Define serializer for API"""
         async_options = self.request.query_params.get('async_options', False)
         if async_options:
-            return ParentBaseSerializer
+            return SectorBaseSerializer
         if self.action == 'list' or self.action == 'retrieve':
-            return ParentReadSerializer
+            return SectorReadSerializer
         else:
-            return ParentSaveSerializer
+            return SectorSaveSerializer
 
     def create(self, request, *args, **kwargs):
         user = request.user.id
