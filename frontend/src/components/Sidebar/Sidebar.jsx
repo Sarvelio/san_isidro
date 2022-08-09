@@ -102,6 +102,13 @@ export default function SideBar({ className }) {
               user={user}
               location={location}
             />
+            <MenuItem
+              title="Usuarios"
+              to="/usuario"
+              Icon={() => <ConstructionIcon />}
+              user={user}
+              location={location}
+            />
             <br />
             <br />
             <br />
