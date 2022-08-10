@@ -6,18 +6,27 @@ import dayjs from "dayjs";
 import { useSelector } from "react-redux";
 import _ from "lodash";
 import ConfiguracionForm from "./ConfiguracionForm";
+import { useEffect, useState } from "react";
 
 export default function Configuracion() {
-  const urlList = "/configuracion";
-  const { saveData } = useCreate("configuracion", urlList);
+  const urlList = "/configuracion/1";
   const { data, updateData, update } = useUpdate("configuracion", urlList);
   const loading = useSelector((state) => state.loading.loading);
+  const [dataConfig, setdataConfig] = useState({});
 
   const onSubmit = async (data) => {
     const body = { ...data };
-    if (!update) saveData(body);
-    else updateData(body);
+    updateData(body).then(() => {
+      setdataConfig({ ...body });
+    });
   };
+
+  useEffect(() => {
+    if (data) {
+      setdataConfig({ ...data });
+    }
+  }, [data]);
+
   return (
     <>
       <div>
@@ -26,9 +35,9 @@ export default function Configuracion() {
       <LoadMask loading={loading}>
         <ConfiguracionForm
           onSubmit={onSubmit}
-          initialValues={{ ...data }}
+          initialValues={dataConfig}
           isUpdating={update}
-          urlList={urlList}
+          urlList="/"
           loading={loading}
         />
       </LoadMask>

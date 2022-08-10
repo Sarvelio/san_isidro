@@ -2,7 +2,7 @@
 from django.db import transaction
 
 # Rest framework
-from rest_framework import viewsets, filters, status
+from rest_framework import viewsets, filters, status, mixins
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
 
@@ -10,50 +10,29 @@ from rest_framework.response import Response
 from api.models import Configuracion
 
 # Serializer
-from api.serializers import ConfiguracionBaseSerializer, ConfiguracionReadSerializer, ConfiguracionSaveSerializer
+from api.serializers import  ConfiguracionReadSerializer, ConfiguracionSaveSerializer
 
 
-class ConfiguracionViewSet(viewsets.ModelViewSet):
-    serializer_class = ConfiguracionReadSerializer
+class ConfiguracionViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
     queryset = Configuracion.objects.filter(active=True)
+    
+    def retrieve(self, request, *args, **kwargs):
+        config = Configuracion.objects.all().last()
+        serializer = ConfiguracionReadSerializer(config, partial=True)
+        print("hola")
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
-    filter_backends = (DjangoFilterBackend,
-                       filters.SearchFilter, filters.OrderingFilter)
-    filter_fields = ("cuota_agua",)
-    search_fields = ("cuota_agua",)
-    ordering_fields = ("id", "cuota_agua")
-
-    def get_serializer_class(self):
-        """Define serializer for API"""
-        async_options = self.request.query_params.get('async_options', False)
-        if async_options:
-            return ConfiguracionBaseSerializer
-        if self.action == 'list' or self.action == 'retrieve':
-            return ConfiguracionReadSerializer
-        else:
-            return ConfiguracionSaveSerializer
-
-    def create(self, request, *args, **kwargs):
-        user = request.user.id
-        data = request.data
-        data['createdBy'] = user # user who created the record 
-
-        with transaction.atomic():
-            serializer = self.get_serializer(data=data)
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
-        usuario = request.user.id
         data = request.data
-        instance = self.get_object()
-        data['updatedBy'] = usuario # user who updated the record
-
-        with transaction.atomic():
-            serializer = self.get_serializer(instance, data=data)
+        config = Configuracion.objects.all().last()
+        if not config:
+            serializer = ConfiguracionSaveSerializer(data=data)
             serializer.is_valid(raise_exception=True)
             serializer.save()
+            return Response(status=status.HTTP_201_CREATED)
 
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        serializer = ConfiguracionSaveSerializer(instance=config, data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(status=status.HTTP_201_CREATED)

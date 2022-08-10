@@ -82,7 +82,7 @@ export default function SideBar({ className }) {
             />
             <MenuItem
               title="Configuracion"
-              to="/configuracion"
+              to="/configuracion/1"
               Icon={() => <ConstructionIcon />}
               user={user}
               location={location}
