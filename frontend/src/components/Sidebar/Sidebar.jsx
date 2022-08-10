@@ -67,37 +67,9 @@ export default function SideBar({ className }) {
               location={location}
             />
             <MenuItem
-              title="Beneficiarios"
-              to="/beneficiary"
-              Icon={() => <PeopleIcon />}
-              user={user}
-              location={location}
-            />
-            <MenuItem
-              title="Patrocinador"
-              to="/sponsor"
-              Icon={() => <PeopleIcon />}
-              user={user}
-              location={location}
-            />
-            <MenuItem
               title="Roles"
               to="/rol"
               Icon={() => <LockIcon />}
-              user={user}
-              location={location}
-            />
-            <MenuItem
-              title="Tipos de proyecto"
-              to="/types"
-              Icon={() => <AutoAwesomeMotionIcon />}
-              user={user}
-              location={location}
-            />
-            <MenuItem
-              title="Proyectos"
-              to="/project"
-              Icon={() => <ConstructionIcon />}
               user={user}
               location={location}
             />

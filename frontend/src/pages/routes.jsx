@@ -8,10 +8,6 @@ import NotFound from "./404";
 // Pages
 import UserRoutes from "./user";
 import RolesRoutes from "./rol";
-import ProjectTypesRoutes from "./project_types";
-import ProjectRoutes from "./project";
-import BeneficiaryRoutes from "./beneficiary";
-import SponsorRoutes from "./sponsor";
 
 // Styles
 import "react-toastify/dist/ReactToastify.min.css";
@@ -42,42 +38,10 @@ export default function App() {
           }
         />
         <Route
-          path="/beneficiary/*"
-          element={
-            <PrivateRoute>
-              <BeneficiaryRoutes />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/sponsor/*"
-          element={
-            <PrivateRoute>
-              <SponsorRoutes />
-            </PrivateRoute>
-          }
-        />
-        <Route
           path="/rol/*"
           element={
             <PrivateRoute>
               <RolesRoutes />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/types/*"
-          element={
-            <PrivateRoute>
-              <ProjectTypesRoutes />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/project/*"
-          element={
-            <PrivateRoute>
-              <ProjectRoutes />
             </PrivateRoute>
           }
         />
