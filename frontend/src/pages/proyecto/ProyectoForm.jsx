@@ -58,12 +58,12 @@ export default function UsuarioForm({
                     { name: "descripcion", title: "Descripcion" },
                     {
                         name: "fecha_inicio",
-                        title: "Fecha de Nacimiento",
+                        title: "Fecha inicio",
                         type: "date",
                     },
                     {
                         name: "fecha_fin",
-                        title: "Fecha de Nacimiento",
+                        title: "Fecha fin",
                         type: "date",
                     },
                 ].map((props, index) => {
@@ -76,7 +76,7 @@ export default function UsuarioForm({
                     );
                 })}
                 <div>
-            <label htmlFor="test" className="label">
+            {/* <label htmlFor="test" className="label">
               Tipo
             </label>
             <div className="control">
@@ -91,7 +91,7 @@ export default function UsuarioForm({
                   { value: 3, label: "Otros" },
                 ]}
               />
-            </div>
+            </div> */}
             </div>
             </div>
 

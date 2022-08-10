@@ -42,8 +42,6 @@ export default function SectorForm({
     reset,
   } = useForm();
 
-  const { asyncOptions } = useAsyncOptions("rol");
-
   useEffect(() => {
     reset(initialValues);
   }, [initialValues]);

@@ -15,6 +15,7 @@ import SectorRoutes from "./sector";
 import UsuarioRoutes from "./usuario";
 import ConfiguracionRoutes from "./configuracion";
 import ProyectoRoutes from "./proyecto";
+import ServicioRoutes from "./servicio";
 
 export default function App() {
   return (
@@ -69,11 +70,19 @@ export default function App() {
             </PrivateRoute>
           }
         />
-         <Route
+        <Route
           path="/proyecto/*"
           element={
             <PrivateRoute>
               <ProyectoRoutes />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/servicio/*"
+          element={
+            <PrivateRoute>
+              <ServicioRoutes />
             </PrivateRoute>
           }
         />

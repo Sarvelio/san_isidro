@@ -42,8 +42,6 @@ export default function ConfiguracionForm({
     reset,
   } = useForm();
 
-  const { asyncOptions } = useAsyncOptions("rol");
-
   useEffect(() => {
     reset(initialValues);
   }, [initialValues]);
