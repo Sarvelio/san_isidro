@@ -1,37 +1,32 @@
 import { useMemo, useState } from "react";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Table, { tableActions } from "../../components/Table";
-import LoadMask from "../../components/LoadMask";
+import Table, { tableActions } from "../../../components/Table";
+import LoadMask from "../../../components/LoadMask";
 import Button from "@mui/material/Button";
-import useList from "../../hooks/useList";
-import useDelete from "../../hooks/useDelete";
-import Search from "../../components/Search/Search";
+import useList from "../../../hooks/useList";
+import useDelete from "../../../hooks/useDelete";
+import Search from "../../../components/Search/Search";
 
 export default function () {
-  const { data, page, getData } = useList("proyecto");
-  const { deleteData } = useDelete("proyecto");
+  const { data, page, getData } = useList("sector");
+  const { deleteData } = useDelete("sector");
   const [search, setSearch] = useState(null);
   const loading = useSelector((state) => state.loading.loading);
   const navigate = useNavigate();
-
+  const { id } = useParams();
   const columns = useMemo(
     () => [
       {
         Header: "Herramientas",
         accessor: tableActions({
-          edit: (id) => navigate(`/proyecto/${id}`),
-          detallesProyecto: (id) => navigate(`/proyecto/${id}/detalles`),
+          edit: (id) => navigate(`/sector/${id}`),
           remove: (id) => deleteData(id, () => getData(1, { search: search })),
         }),
       },
       {
         Header: "Nombre",
         accessor: "nombre",
-      },
-      {
-        Header: "Tipo",
-        accessor: "tipo",
       },
     ],
     []
@@ -40,7 +35,7 @@ export default function () {
   return (
     <>
       <div className="flex mb-2 sm:mb-0">
-        <h1 className="text-title">Proyectos</h1>
+        <h1 className="text-title">Sectores</h1>
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-20 mt-4">
         <Search
@@ -57,7 +52,7 @@ export default function () {
             component={RouterLink}
             disableElevation
             variant="contained"
-            to="/proyecto/create"
+            to={`/proyecto/${id}/detalles/create`}
           >
             Agregar
           </Button>

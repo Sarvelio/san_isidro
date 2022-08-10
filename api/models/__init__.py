@@ -7,3 +7,4 @@ from .sector import Sector
 from .configuracion import Configuracion
 from .proyecto import Proyecto
 from .servicio import Servicio
+from .detalle import Detalle

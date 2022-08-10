@@ -12,9 +12,14 @@ function Actions({
   remove = undefined,
   activities = undefined,
   row = {},
+  detallesProyecto=undefined,
 }) {
   const editAction = () => {
     edit(id, row);
+  };
+
+  const detallesProyectoAction = () => {
+    detallesProyecto(id, row);
   };
 
   const activitiesAction = () => {
@@ -42,6 +47,16 @@ function Actions({
             style={{ cursor: "pointer", color: "#c4183c" }}
             onClick={editAction}
             title="Editar"
+          >
+            <EditIcon color="primary" />
+          </a>
+        )}
+        {detallesProyecto && (
+          <a
+            className="px-2"
+            style={{ cursor: "pointer", color: "#c4183c" }}
+            onClick={detallesProyectoAction}
+            title="Ingreso/Egreso"
           >
             <EditIcon color="primary" />
           </a>

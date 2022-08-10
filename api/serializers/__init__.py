@@ -6,3 +6,4 @@ from .sector import SectorBaseSerializer, SectorReadSerializer, SectorSaveSerial
 from .configuracion import  ConfiguracionReadSerializer, ConfiguracionSaveSerializer
 from .proyecto import ProyectoBaseSerializer, ProyectoReadSerializer, ProyectoSaveSerializer
 from .servicio import ServicioBaseSerializer, ServicioReadSerializer, ServicioSaveSerializer
+from .detalle import DetalleBaseSerializer, DetalleReadSerializer, DetalleSaveSerializer
