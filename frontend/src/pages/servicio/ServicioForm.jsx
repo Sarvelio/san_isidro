@@ -53,14 +53,7 @@ export default function ServicioForm({
     <div className="w-full flex flex-wrap">
       {[
         { type: "title", title: "Datos del servicio" },
-        {
-          name: "tipo",
-          title: "Tipo",
-          options: [
-            { value: 1, label: "Servicio Agua" },
-            { value: 2, label: "Servicio Cementerio" },
-          ],
-        },
+       
         {
           component: (
             <div className="w-full sm:w-1/2 px-2 sm:px-6">

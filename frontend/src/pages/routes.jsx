@@ -15,6 +15,7 @@ import SectorRoutes from "./sector";
 import UsuarioRoutes from "./usuario";
 import ProyectoRoutes from "./proyecto";
 import Configuracion from "./configuracion/Configuracion";
+import ServicioRoutes from "./servicio";
 
 export default function App() {
   return (

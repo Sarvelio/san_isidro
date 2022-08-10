@@ -16,7 +16,7 @@ class Servicio(BaseModel):
     usuario = models.ForeignKey(
         'api.Usuario', on_delete=models.CASCADE, related_name='servicios')
 
-    tipo = models.IntegerField(choices=TIPOS_SERVICIOS)
+    tipo = models.IntegerField(choices=TIPOS_SERVICIOS, default=AGUA)
 
     # Servira para aguardar en numero de perdio para los usuarios de cementerio
     no_predio = models.IntegerField(blank=True, null=True)
