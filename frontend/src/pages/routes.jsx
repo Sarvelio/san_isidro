@@ -13,9 +13,8 @@ import RolesRoutes from "./rol";
 import "react-toastify/dist/ReactToastify.min.css";
 import SectorRoutes from "./sector";
 import UsuarioRoutes from "./usuario";
-import ConfiguracionRoutes from "./configuracion";
 import ProyectoRoutes from "./proyecto";
-import ServicioRoutes from "./servicio";
+import Configuracion from "./configuracion/Configuracion";
 
 export default function App() {
   return (
@@ -63,10 +62,10 @@ export default function App() {
           }
         />
         <Route
-          path="/configuracion/*"
+          path="/configuracion/:id"
           element={
             <PrivateRoute>
-              <ConfiguracionRoutes />
+              <Configuracion />
             </PrivateRoute>
           }
         />

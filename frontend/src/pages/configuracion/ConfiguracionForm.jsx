@@ -19,11 +19,7 @@ import {
   password,
 } from "../../validations";
 import ButtonUi from "../../components/UI";
-import {
-  InputMasterField,
-  InputTextField,
-  InputSelectField,
-} from "../../components/Input";
+import { InputMasterField } from "../../components/Input";
 import FormFooter from "../../components/Form/FormFooter";
 
 export default function ConfiguracionForm({
@@ -56,8 +52,6 @@ export default function ConfiguracionForm({
             title: "Cuota del servicio de agua",
             validations: ["required", "numeric"],
           },
-         
-         
         ].map((props, index) => {
           return (
             <InputMasterField

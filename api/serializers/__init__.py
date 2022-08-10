@@ -3,6 +3,5 @@ from .user import UserBaseSerializer, UserReadSerializer, UserSerializer
 from .rol import RolReadSerializer, RolSerializer
 from .usuario import UsuarioBaseSerializer, UsuarioReadSerializer, UsuarioSaveSerializer
 from .sector import SectorBaseSerializer, SectorReadSerializer, SectorSaveSerializer
-from .configuracion import ConfiguracionBaseSerializer, ConfiguracionReadSerializer, ConfiguracionSaveSerializer
+from .configuracion import  ConfiguracionReadSerializer, ConfiguracionSaveSerializer
 from .proyecto import ProyectoBaseSerializer, ProyectoReadSerializer, ProyectoSaveSerializer
-from .servicio import ServicioBaseSerializer, ServicioReadSerializer, ServicioSaveSerializer

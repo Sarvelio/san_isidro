@@ -19,7 +19,7 @@ const FormFooter = ({
           {errorData}
         </div>
       )}
-      {!onlyRead && isUpdating && (
+      {/* {!onlyRead && isUpdating && (
         <button
           className="btn btn-outline-danger mx-0 my-2 px-4"
           type="button"
@@ -30,7 +30,7 @@ const FormFooter = ({
         >
           Eliminar registro
         </button>
-      )}
+      )} */}
       <div className="grid gap-2 sm:block text-center">
         <div className="mx-2 sm:px-4 sm:inline-block contents">
           <ButtonUi
