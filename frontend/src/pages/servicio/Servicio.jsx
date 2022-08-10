@@ -1,4 +1,3 @@
-// import SectorForm from "./SectorForm";
 import LoadMask from "../../components/LoadMask";
 import useCreate from "../../hooks/useCreate";
 import useUpdate from "../../hooks/useUpdate";
