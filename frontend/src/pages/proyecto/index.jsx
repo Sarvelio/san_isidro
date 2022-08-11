@@ -9,7 +9,7 @@ export default function ProyectoRoutes() {
     <Routes>
       <Route path="/" element={<ProyectoList />} />
       <Route path="/create" element={<Proyecto />} />
-      <Route path="/:id/detalles/*" element={<Detalles />} />
+      <Route path="/:idProyecto/detalles/*" element={<Detalles />} />
       <Route path="/:id" element={<Proyecto />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

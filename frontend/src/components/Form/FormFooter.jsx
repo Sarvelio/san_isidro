@@ -37,6 +37,7 @@ const FormFooter = ({
             type="button"
             disabled={loading}
             onClick={() => {
+              console.log("saliendo de la pagina", urlList);
               navigate(urlList);
             }}
             button="secondary"

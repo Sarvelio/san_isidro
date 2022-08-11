@@ -5,15 +5,27 @@ import useUpdate from "../../../hooks/useUpdate";
 import dayjs from "dayjs";
 import { useSelector } from "react-redux";
 import _ from "lodash";
+import { useParams } from "react-router-dom";
 
 export default function Sector() {
-  const urlList = "/sector";
-  const { saveData } = useCreate("sector", urlList);
-  const { data, updateData, update } = useUpdate("sector", urlList);
+  const { idProyecto } = useParams();
+  const urlList = `/proyecto/${idProyecto}/detalles`;
+  const { saveData } = useCreate("detalles", urlList);
+  const { data, updateData, update } = useUpdate("detalles", urlList);
   const loading = useSelector((state) => state.loading.loading);
 
   const onSubmit = async (data) => {
     const body = { ...data };
+    if (update) {
+      body.proyecto = idProyecto;
+    }
+
+    // borrar-datos
+    body.descripcion = "borrar xd";
+    body.monto = "123";
+    body.tipo = 10;
+    // borrar-datos
+
     if (!update) saveData(body);
     else updateData(body);
   };
@@ -27,7 +39,7 @@ export default function Sector() {
           onSubmit={onSubmit}
           initialValues={{ ...data }}
           isUpdating={update}
-          urlList={`/proyecto/${id}/detalles/create`}
+          urlList={urlList}
           loading={loading}
         />
       </LoadMask>

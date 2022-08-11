@@ -1,4 +1,5 @@
 # django
+from ast import Delete
 from django.db import transaction
 
 # Rest framework
@@ -19,9 +20,9 @@ class DetalleViewSet(viewsets.ModelViewSet):
 
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
-    filter_fields = ("nombre",)
-    search_fields = ("nombre",)
-    ordering_fields = ("id", "nombre")
+    filterset_fields = ('proyecto',)
+    search_fields = ("descripcion")
+    ordering_fields = ("id", "descripcion")
 
     def get_serializer_class(self):
         """Define serializer for API"""

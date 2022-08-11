@@ -49,7 +49,7 @@ export default function SectorForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="w-full flex flex-wrap">
-        {[
+        {/* {[
           { type: "title", title: "Datos del sector" },
           {
             name: "nombre",
@@ -66,7 +66,7 @@ export default function SectorForm({
               {...props}
             />
           );
-        })}
+        })} */}
       </div>
       <FormFooter {...{ loading, isUpdating, urlList }} />
       <br />

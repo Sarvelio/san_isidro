@@ -21,4 +21,4 @@ class Detalle(BaseModel):
     monto = models.FloatField()
 
     proyecto = models.ForeignKey(
-        'api.Proyecto', on_delete=models.CASCADE, related_name='detalles', null=True)
+        'api.Proyecto', on_delete=models.CASCADE, related_name='detalles')
