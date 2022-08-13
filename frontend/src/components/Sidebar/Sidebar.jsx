@@ -73,15 +73,8 @@ export default function SideBar({ className }) {
               user={user}
               location={location}
             />
-            {/* <MenuItem
-              title="Roles"
-              to="/rol"
-              Icon={() => <LockIcon />}
-              user={user}
-              location={location}
-            /> */}
             <MenuItem
-              title="Servicios"
+              title="Servicio agua"
               to="/servicio"
               Icon={() => <ConstructionIcon />}
               user={user}

@@ -28,7 +28,7 @@ export default function Servicio() {
   return (
     <>
       <div>
-        <h1 className="text-title mb-4">Servicio</h1>
+        <h1 className="text-title mb-4">Servicio de Agua</h1>
       </div>
       <LoadMask loading={loading}>
         <ServicioForm
