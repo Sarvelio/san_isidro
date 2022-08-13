@@ -10,8 +10,8 @@ import Search from "../../../components/Search/Search";
 
 export default function () {
   const { idServicio } = useParams();
-  const { data, page, getData } = useList("detalles", { servicio: idServicio });
-  const { deleteData } = useDelete("detalles");
+  const { data, page, getData } = useList("pagos", { servicio: idServicio });
+  const { deleteData } = useDelete("pagos");
   const [search, setSearch] = useState(null);
   const loading = useSelector((state) => state.loading.loading);
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function () {
       {
         Header: "Herramientas",
         accessor: tableActions({
-          edit: (id) => navigate(`/servicio/${idServicio}/detalles/${id}`),
+          edit: (id) => navigate(`/servicio/${idServicio}/pagos/${id}`),
           remove: (id) => deleteData(id, () => getData(1, { search: search })),
         }),
       },
@@ -64,7 +64,7 @@ export default function () {
             component={RouterLink}
             disableElevation
             variant="contained"
-            to={`/servicio/${idServicio}/detalles/create`}
+            to={`/servicio/${idServicio}/pagos/create`}
           >
             Agregar
           </Button>

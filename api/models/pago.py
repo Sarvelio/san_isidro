@@ -36,7 +36,6 @@ class Pago(BaseModel):
 
     servicio = models.ForeignKey(
         'api.Servicio', on_delete=models.CASCADE, related_name='pagos')
-
     anio = models.PositiveSmallIntegerField()
     mes = models.PositiveSmallIntegerField(choices=MESES)
     descripcion = models.TextField(blank=True, null=True)

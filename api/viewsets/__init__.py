@@ -5,3 +5,4 @@ from .configuracion import ConfiguracionViewSet
 from .proyecto import ProyectoViewSet
 from .servicio import ServicioViewSet
 from .detalle import DetalleViewSet
+from .pago import PagoViewSet

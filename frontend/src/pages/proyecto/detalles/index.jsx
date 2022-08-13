@@ -1,14 +1,14 @@
 import { Routes, Route } from "react-router-dom";
-import Sector from "./Sector";
-import SectorList from "./SectorList";
+import Detalles from "./Detalles";
+import DetallesList from "./DetallesList";
 import NotFound from "../../404";
 
-export default function SectorRoutes() {
+export default function DetallesRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<SectorList />} />
-      <Route path="/create" element={<Sector />} />
-      <Route path="/:id" element={<Sector />} />
+      <Route path="/" element={<DetallesList />} />
+      <Route path="/create" element={<Detalles />} />
+      <Route path="/:id" element={<Detalles />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

@@ -26,7 +26,7 @@ import {
 } from "../../../components/Input";
 import FormFooter from "../../../components/Form/FormFooter";
 
-export default function SectorForm({
+export default function DetallesForm({
   onSubmit,
   initialValues = {},
   isUpdating,
@@ -56,8 +56,6 @@ export default function SectorForm({
 
                 {[
                     { type: "title", title: "Detalles del proyecto" },
-                    { name: "descripcion", title: "Descripcion" },
-                    { name: "monto", title: "Monto" },
                     {
                       component: (
                         <div className="w-full sm:w-1/2 px-2 sm:px-6">
@@ -83,7 +81,10 @@ export default function SectorForm({
                         
                       </div>
                       )
-                    }
+                    },
+                    { name: "descripcion", title: "Descripcion" },
+                    { name: "monto", title: "Monto" },
+                   
  
 
                 ].map((props, index) => {

@@ -9,7 +9,7 @@ export default function ServicioRoutes() {
     <Routes>
       <Route path="/" element={<ServicioList />} />
       <Route path="/create" element={<Servicio />} />
-      <Route path="/:idServicio/detalles/*" element={<Detalles />} />
+      <Route path="/:idServicio/pagos/*" element={<Detalles />} />
       <Route path="/:id" element={<Servicio />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

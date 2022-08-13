@@ -22,7 +22,7 @@ export default function () {
         accessor: tableActions({
           edit: (id) => navigate(`/servicio/${id}`),
           remove: (id) => deleteData(id, () => getData(1, { search: search })),
-          detallesPagos: (id) => navigate(`/servicio/${id}/detalles`),
+          detallesPagos: (id) => navigate(`/servicio/${id}/pagos`),
         }),
       },
       {

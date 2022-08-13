@@ -1,4 +1,4 @@
-import SectorForm from "./SectorForm";
+import DetallesForm from "./DetallesForm";
 import LoadMask from "../../../components/LoadMask";
 import useCreate from "../../../hooks/useCreate";
 import useUpdate from "../../../hooks/useUpdate";
@@ -33,7 +33,7 @@ export default function Sector() {
         <h1 className="text-title mb-4">Detalles</h1>
       </div>
       <LoadMask loading={loading}>
-        <SectorForm
+        <DetallesForm
           onSubmit={onSubmit}
           initialValues={{ ...data }}
           isUpdating={update}
