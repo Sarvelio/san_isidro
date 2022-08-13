@@ -42,32 +42,63 @@ export default function SectorForm({
     reset,
   } = useForm();
 
+  const { asyncOptions: asyncOptionsProyecto } = useAsyncOptions("proyecto");
+
+
   useEffect(() => {
     reset(initialValues);
   }, [initialValues]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="w-full flex flex-wrap">
-        {/* {[
-          { type: "title", title: "Datos del sector" },
-          {
-            name: "nombre",
-            title: "Sector",
-            validations: ["required", "alphanumeric"],
-          },
-         
-         
-        ].map((props, index) => {
-          return (
-            <InputMasterField
-              key={props.name || index}
-              control={control}
-              {...props}
-            />
-          );
-        })} */}
-      </div>
+
+<div className="w-full flex flex-wrap">
+
+                {[
+                    { type: "title", title: "Detalles del proyecto" },
+                    { name: "descripcion", title: "Descripcion" },
+                    { name: "monto", title: "Monto" },
+                    {
+                      component: (
+                        <div className="w-full sm:w-1/2 px-2 sm:px-6">
+                        <div>
+                        <label htmlFor="test" className="label">
+                          Tipo
+                        </label>
+                        <div className="control">
+                          <InputSelect
+                            control={control}
+                            name="tipo"
+                            rules={{ validate: required }}
+                            placeholder="Seleccione tipo"
+                            options={[
+                              { value: 10, label: "Ingreso" },
+                              { value: 20, label: "Egreso" },
+                              { value: 30, label: "Neutro" },
+                            ]}
+                          />
+                        </div>
+                          
+                        </div>
+                        
+                      </div>
+                      )
+                    }
+ 
+
+                ].map((props, index) => {
+                    return (
+                        <InputMasterField
+                            key={props.name || index}
+                            control={control}
+                            {...props}
+                        />
+                    );
+                })}
+                <div>
+           
+            </div>
+            </div>
       <FormFooter {...{ loading, isUpdating, urlList }} />
       <br />
     </form>
