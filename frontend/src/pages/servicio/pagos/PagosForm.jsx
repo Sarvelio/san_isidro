@@ -26,7 +26,7 @@ import {
 } from "../../../components/Input";
 import FormFooter from "../../../components/Form/FormFooter";
 
-export default function PagoForm({
+export default function PagosForm({
   onSubmit,
   initialValues = {},
   isUpdating,
@@ -42,30 +42,36 @@ export default function PagoForm({
     reset,
   } = useForm();
 
+  const { asyncOptions: asyncOptionsServicio } = useAsyncOptions("servicio");
+
+
   useEffect(() => {
     reset(initialValues);
   }, [initialValues]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="w-full flex flex-wrap">
-        {[
-          { type: "title", title: "Datos del pago" },
-          {
-            name: "nombre",
-            title: "Pago",
-            validations: ["required"],
-          },
-        ].map((props, index) => {
-          return (
-            <InputMasterField
-              key={props.name || index}
-              control={control}
-              {...props}
-            />
-          );
-        })}
-      </div>
+
+<div className="w-full flex flex-wrap">
+
+                {[
+                    { type: "title", title: "Detalles del pago" },
+                    { name: "descripcion", title: "Servicio a pagar" },
+                    { name: "monto", title: "Pago por mes" },
+                    { name: "mes", title: "Mes a pagar" },
+                    { name: "total", title: "Total a pagar" },
+                ].map((props, index) => {
+                    return (
+                        <InputMasterField
+                            key={props.name || index}
+                            control={control}
+                            {...props}
+                        />
+                    );
+                })}
+                <div>
+            </div>
+            </div>
       <FormFooter {...{ loading, isUpdating, urlList }} />
       <br />
     </form>

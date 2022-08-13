@@ -6,6 +6,8 @@ import FactCheckIcon from "@mui/icons-material/FactCheck";
 import Swal from "sweetalert2";
 import { SwalWarning } from "../SwalAlerts";
 import StickyNote2Icon from "@mui/icons-material/StickyNote2";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+
 
 function Actions({
   id,
@@ -14,6 +16,7 @@ function Actions({
   activities = undefined,
   row = {},
   detallesProyecto = undefined,
+  detallesPagos = undefined,
 }) {
   const editAction = () => {
     edit(id, row);
@@ -21,6 +24,10 @@ function Actions({
 
   const detallesProyectoAction = () => {
     detallesProyecto(id, row);
+  };
+
+  const detallesPagosAction = () => {
+    detallesPagos(id, row);
   };
 
   const activitiesAction = () => {
@@ -80,6 +87,16 @@ function Actions({
             title="Actividades"
           >
             <FactCheckIcon color="primary" />
+          </a>
+        )}
+        {detallesPagos && (
+          <a
+            className="px-2"
+            style={{ cursor: "pointer", color: "#c4183c" }}
+            onClick={detallesPagosAction}
+            title="Detalle del pago"
+          >
+            <AttachMoneyIcon color="primary" />
           </a>
         )}
       </div>

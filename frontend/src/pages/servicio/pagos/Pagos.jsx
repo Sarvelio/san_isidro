@@ -1,29 +1,39 @@
-import PagoForm from "./PagoForm";
+import PagosForm from "./PagosForm";
 import LoadMask from "../../../components/LoadMask";
 import useCreate from "../../../hooks/useCreate";
 import useUpdate from "../../../hooks/useUpdate";
 import dayjs from "dayjs";
 import { useSelector } from "react-redux";
 import _ from "lodash";
+import { useParams } from "react-router-dom";
 
-export default function Pago() {
-  const urlList = "/pago";
-  const { saveData } = useCreate("pago", urlList);
-  const { data, updateData, update } = useUpdate("pago", urlList);
+export default function Sector() {
+  const { idServicio } = useParams();
+  const urlList = `/servicio/${idServicio}/detalles`;
+  const { saveData } = useCreate("detalles", urlList);
+  const { data, updateData, update } = useUpdate("detalles", urlList);
   const loading = useSelector((state) => state.loading.loading);
 
   const onSubmit = async (data) => {
     const body = { ...data };
+    body.servicio = idServicio;
+
+    // borrar-datos
+    // body.descripcion = "borrar xd";
+    // body.monto = "123";
+    // body.tipo = 10;
+    // borrar-datos
+
     if (!update) saveData(body);
     else updateData(body);
   };
   return (
     <>
       <div>
-        <h1 className="text-title mb-4">Pago</h1>
+        <h1 className="text-title mb-4">Detalles</h1>
       </div>
       <LoadMask loading={loading}>
-        <PagoForm
+        <PagosForm
           onSubmit={onSubmit}
           initialValues={{ ...data }}
           isUpdating={update}

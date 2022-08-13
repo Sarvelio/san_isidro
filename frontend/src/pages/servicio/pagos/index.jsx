@@ -1,14 +1,14 @@
 import { Routes, Route } from "react-router-dom";
-import Pago from "./Pago";
-import PagoList from "./PagoList";
+import Pagos from "./Pagos";
+import PagosList from "./PagosList";
 import NotFound from "../../404";
 
-export default function PagoRoutes() {
+export default function PagosRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<PagoList />} />
-      <Route path="/create" element={<Pago />} />
-      <Route path="/:id" element={<Pago />} />
+      <Route path="/" element={<PagosList />} />
+      <Route path="/create" element={<Pagos />} />
+      <Route path="/:id" element={<Pagos />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
