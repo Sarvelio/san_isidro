@@ -5,6 +5,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import FactCheckIcon from "@mui/icons-material/FactCheck";
 import Swal from "sweetalert2";
 import { SwalWarning } from "../SwalAlerts";
+import StickyNote2Icon from "@mui/icons-material/StickyNote2";
 
 function Actions({
   id,
@@ -12,7 +13,7 @@ function Actions({
   remove = undefined,
   activities = undefined,
   row = {},
-  detallesProyecto=undefined,
+  detallesProyecto = undefined,
 }) {
   const editAction = () => {
     edit(id, row);
@@ -51,16 +52,6 @@ function Actions({
             <EditIcon color="primary" />
           </a>
         )}
-        {detallesProyecto && (
-          <a
-            className="px-2"
-            style={{ cursor: "pointer", color: "#c4183c" }}
-            onClick={detallesProyectoAction}
-            title="Ingreso/Egreso"
-          >
-            <EditIcon color="primary" />
-          </a>
-        )}
         {remove && (
           <a
             className="px-2"
@@ -69,6 +60,16 @@ function Actions({
             title="Eliminar"
           >
             <DeleteForeverIcon color="primary" />
+          </a>
+        )}
+        {detallesProyecto && (
+          <a
+            className="px-2"
+            style={{ cursor: "pointer", color: "#c4183c" }}
+            onClick={detallesProyectoAction}
+            title="Ingreso/Egreso"
+          >
+            <StickyNote2Icon color="primary" />
           </a>
         )}
         {activities && (

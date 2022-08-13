@@ -21,8 +21,8 @@ export default function () {
         Header: "Herramientas",
         accessor: tableActions({
           edit: (id) => navigate(`/proyecto/${id}`),
-          detallesProyecto: (id) => navigate(`/proyecto/${id}/detalles`),
           remove: (id) => deleteData(id, () => getData(1, { search: search })),
+          detallesProyecto: (id) => navigate(`/proyecto/${id}/detalles`),
         }),
       },
       {

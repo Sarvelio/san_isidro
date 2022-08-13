@@ -16,9 +16,7 @@ export default function Sector() {
 
   const onSubmit = async (data) => {
     const body = { ...data };
-    if (update) {
-      body.proyecto = idProyecto;
-    }
+    body.proyecto = idProyecto;
 
     // borrar-datos
     body.descripcion = "borrar xd";
@@ -32,7 +30,7 @@ export default function Sector() {
   return (
     <>
       <div>
-        <h1 className="text-title mb-4">Sector</h1>
+        <h1 className="text-title mb-4">Detalles</h1>
       </div>
       <LoadMask loading={loading}>
         <SectorForm
