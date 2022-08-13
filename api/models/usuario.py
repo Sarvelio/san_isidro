@@ -22,7 +22,6 @@ class Usuario(BaseModel):
   dpi = models.CharField(max_length=13, unique=True)
   foto = models.ImageField(upload_to='usuario/foto/', null=True, blank=True)
   telefono = models.CharField(max_length=15, blank=True, null=True)
-  sector = models.ForeignKey('api.Sector', on_delete=models.CASCADE, related_name='usuarios')
 
 
 

@@ -27,7 +27,6 @@ import {
 } from "../../components/Input";
 import FormFooter from "../../components/Form/FormFooter";
 
-
 export default function UsuarioForm({
   onSubmit,
   initialValues = {},
@@ -44,8 +43,6 @@ export default function UsuarioForm({
     reset,
   } = useForm();
 
-  const { asyncOptions } = useAsyncOptions("sector");
-
   useEffect(() => {
     reset(initialValues);
   }, [initialValues]);
@@ -53,13 +50,10 @@ export default function UsuarioForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="w-full flex flex-wrap">
-
         {[
           { type: "title", title: "Datos Personales" },
-          { name: "nombres", title: "Nombre", },
-          { name: "apellidos", title: "Apellido", },
-          // { name: "birthday", title: "Fecha de Nacimiento", type: "date" },
-
+          { name: "nombres", title: "Nombre" },
+          { name: "apellidos", title: "Apellido" },
           {
             name: "genero",
             title: "Género",
@@ -70,42 +64,11 @@ export default function UsuarioForm({
           },
           {
             name: "dpi",
-            title: "DPI"
-          },
-         
-          {
-            component: (
-              <div className="w-full sm:w-1/2 px-2 sm:px-6">
-                <div>
-                  <label htmlFor="test" className="label">
-                    Sector
-                  </label>
-                  <div className="control">
-                    <InputAsyncSelect
-                      control={control}
-                      loadOptions={asyncOptions}
-                      isSearchable={true}
-                      valueKey="id"
-                      labelKey="nombre"
-                      name="sector"
-                      rules={{ validate: required }}
-                      placeholder="Seleccione sector"
-                    />
-                  </div>
-                </div>
-                <div>
-            <label htmlFor="test" className="label">
-              Foto
-            </label>
-            <InputPhoto control={control} name="photo" />
-          </div>
-              </div>
-              
-            ),
+            title: "DPI",
           },
           {
             name: "telefono",
-            title: "Teléfono"
+            title: "Teléfono",
           },
         ].map((props, index) => {
           return (
@@ -116,7 +79,6 @@ export default function UsuarioForm({
             />
           );
         })}
-        
       </div>
       <FormFooter {...{ loading, isUpdating, urlList }} />
       <br />

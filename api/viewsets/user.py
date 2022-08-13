@@ -129,8 +129,6 @@ class UserViewSet(viewsets.ModelViewSet):
             serializer.is_valid(raise_exception=True)
             user = serializer.save()
             user.createdBy = request.user
-            user.groups.clear()
-            user.groups.add(user.rol.group_ptr)
             user_password = data.get('password', None)
             if user_password is None:
                 temp_pwd = generate_temporary_password()
@@ -160,8 +158,6 @@ class UserViewSet(viewsets.ModelViewSet):
             user = serializer.save()
             user.updatedBy = request.user
             user_password = data.get('password', None)
-            user.groups.clear()
-            user.groups.add(user.rol.group_ptr)
             if user_password is not None:
                 validatePassword(data.get('password', ''))
                 user.set_password(data.get("password", ''))

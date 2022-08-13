@@ -53,23 +53,9 @@ export default function SideBar({ className }) {
               location={location}
             />
             <MenuItem
-              title="Usuarios 2"
-              to="/usuario"
-              Icon={() => <ConstructionIcon />}
-              user={user}
-              location={location}
-            />
-            <MenuItem
               title="Usuarios"
               to="/user"
               Icon={() => <PeopleIcon />}
-              user={user}
-              location={location}
-            />
-            <MenuItem
-              title="Roles"
-              to="/rol"
-              Icon={() => <LockIcon />}
               user={user}
               location={location}
             />
@@ -81,8 +67,22 @@ export default function SideBar({ className }) {
               location={location}
             />
             <MenuItem
-              title="Configuracion"
-              to="/configuracion/1"
+              title="Usuarios"
+              to="/usuario"
+              Icon={() => <ConstructionIcon />}
+              user={user}
+              location={location}
+            />
+            {/* <MenuItem
+              title="Roles"
+              to="/rol"
+              Icon={() => <LockIcon />}
+              user={user}
+              location={location}
+            /> */}
+            <MenuItem
+              title="Servicios"
+              to="/servicio"
               Icon={() => <ConstructionIcon />}
               user={user}
               location={location}
@@ -94,9 +94,9 @@ export default function SideBar({ className }) {
               user={user}
               location={location}
             />
-             <MenuItem
-              title="Servicios"
-              to="/servicio"
+            <MenuItem
+              title="Configuración"
+              to="/configuracion/1"
               Icon={() => <ConstructionIcon />}
               user={user}
               location={location}

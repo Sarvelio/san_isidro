@@ -14,17 +14,13 @@ export default function Usuario() {
 
   const onSubmit = async (data) => {
     const body = { ...data };
-    delete body.sector;
-    if (_.get(data, "sector.id", undefined) !== undefined) {
-      body.sector = data.sector.id;
-    }
     if (!update) saveData(body);
     else updateData(body);
   };
   return (
     <>
       <div>
-        <h1 className="text-title mb-4">Usuario</h1>
+        <h1 className="text-title mb-4">Persona</h1>
       </div>
       <LoadMask loading={loading}>
         <UsuarioForm

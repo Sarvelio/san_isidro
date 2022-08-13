@@ -42,7 +42,9 @@ export default function ServicioForm({
     reset,
   } = useForm();
 
-  const { asyncOptions } = useAsyncOptions("usuario");
+  const { asyncOptions: asyncOptionsSector } = useAsyncOptions("sector");
+
+  const { asyncOptions: asyncOptionsUsuario } = useAsyncOptions("usuario");
 
   useEffect(() => {
     reset(initialValues);
@@ -50,86 +52,104 @@ export default function ServicioForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-    <div className="w-full flex flex-wrap">
-      {[
-        { type: "title", title: "Datos del servicio" },
-       
-        {
-          component: (
-            <div className="w-full sm:w-1/2 px-2 sm:px-6">
-              <div>
-                <label htmlFor="test" className="label">
-                  Usuario
-                </label>
-                <div className="control">
-                  <InputAsyncSelect
-                    control={control}
-                    loadOptions={asyncOptions}
-                    isSearchable={true}
-                    valueKey="id"
-                    labelKey="nombres"
-                    name="usuario"
-                    rules={{ validate: required }}
-                    placeholder="Seleccione usuario"
-                  />
+      <div className="w-full flex flex-wrap">
+        {[
+          { type: "title", title: "Datos del servicio" },
+
+          {
+            component: (
+              <div className="w-full sm:w-1/2 px-2 sm:px-6">
+                <div>
+                  <label htmlFor="test" className="label">
+                    Usuario
+                  </label>
+                  <div className="control">
+                    <InputAsyncSelect
+                      control={control}
+                      loadOptions={asyncOptionsUsuario}
+                      isSearchable={true}
+                      valueKey="id"
+                      labelKey="nombres"
+                      name="usuario"
+                      rules={{ validate: required }}
+                      placeholder="Seleccione usuario"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          ),
-        },
-        {
-          name: "anio",
-          title: "Año",
-          options: [
-            { value: 2020, label: '2020' },
-            { value: 2021, label: '2021' },
-            { value: 2022, label: '2022' },
-            { value: 2023, label: '2023' },
-            { value: 2024, label: '2024' },
-            { value: 2025, label: '2025' },
-            { value: 2026, label: '2026' },
-            { value: 2027, label: '2027' },
-          ]
-        },
-        {
-          name: "mes",
-          title: "Mes",
-          options: [
-            { value: 1, label: 'Enero' },
-            { value: 2, label: 'Febrero' },
-            { value: 3, label: 'Marzo' },
-            { value: 4, label: 'Abril' },
-            { value: 5, label: 'Mayo' },
-            { value: 6, label: 'Junio' },
-            { value: 7, label: 'Julio' },
-            { value: 8, label: 'Agosto' },
-            { value: 9, label: 'Septiembre' },
-            { value: 10, label: 'Octubre' },
-            { value: 11, label: 'Noviembre' },
-            { value: 12, label: 'Diciembre' },
-          ],
-        },
-        {
-          name: "descripcion",
-          title: "Descripción",
-        },
-        {
-          name: "no_predio",
-          title: "Nº predio",
-        },
-      ].map((props, index) => {
-        return (
-          <InputMasterField
-            key={props.name || index}
-            control={control}
-            {...props}
-          />
-        );
-      })}
-
-    </div>
-    <FormFooter {...{ loading, isUpdating, urlList }} />
-    <br />
-  </form>
+            ),
+          },
+          {
+            name: "anio",
+            title: "Año",
+            options: [
+              { value: 2020, label: "2020" },
+              { value: 2021, label: "2021" },
+              { value: 2022, label: "2022" },
+              { value: 2023, label: "2023" },
+              { value: 2024, label: "2024" },
+              { value: 2025, label: "2025" },
+              { value: 2026, label: "2026" },
+              { value: 2027, label: "2027" },
+            ],
+          },
+          {
+            name: "mes",
+            title: "Mes",
+            options: [
+              { value: 1, label: "Enero" },
+              { value: 2, label: "Febrero" },
+              { value: 3, label: "Marzo" },
+              { value: 4, label: "Abril" },
+              { value: 5, label: "Mayo" },
+              { value: 6, label: "Junio" },
+              { value: 7, label: "Julio" },
+              { value: 8, label: "Agosto" },
+              { value: 9, label: "Septiembre" },
+              { value: 10, label: "Octubre" },
+              { value: 11, label: "Noviembre" },
+              { value: 12, label: "Diciembre" },
+            ],
+          },
+          {
+            component: (
+              <div className="w-full sm:w-1/2 px-2 sm:px-6">
+                <div>
+                  <label htmlFor="test" className="label">
+                    Sector
+                  </label>
+                  <div className="control">
+                    <InputAsyncSelect
+                      control={control}
+                      loadOptions={asyncOptionsSector}
+                      isSearchable={true}
+                      valueKey="id"
+                      labelKey="nombre"
+                      name="sector"
+                      rules={{ validate: required }}
+                      placeholder="Seleccione sector"
+                    />
+                  </div>
+                </div>
+              </div>
+            ),
+          },
+          {
+            name: "descripcion",
+            title: "Descripción",
+          },
+        ].map((props, index) => {
+          return (
+            <InputMasterField
+              key={props.name || index}
+              control={control}
+              {...props}
+            />
+          );
+        })}
+      </div>
+      <FormFooter {...{ loading, isUpdating, urlList }} />
+      <br />
+    </form>
   );
 }

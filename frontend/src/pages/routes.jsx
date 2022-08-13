@@ -7,7 +7,6 @@ import NotFound from "./404";
 
 // Pages
 import UserRoutes from "./user";
-import RolesRoutes from "./rol";
 
 // Styles
 import "react-toastify/dist/ReactToastify.min.css";
@@ -39,14 +38,6 @@ export default function App() {
           }
         />
         <Route
-          path="/rol/*"
-          element={
-            <PrivateRoute>
-              <RolesRoutes />
-            </PrivateRoute>
-          }
-        />
-        <Route
           path="/sector/*"
           element={
             <PrivateRoute>
@@ -63,14 +54,6 @@ export default function App() {
           }
         />
         <Route
-          path="/configuracion/:id"
-          element={
-            <PrivateRoute>
-              <Configuracion />
-            </PrivateRoute>
-          }
-        />
-        <Route
           path="/proyecto/*"
           element={
             <PrivateRoute>
@@ -83,6 +66,14 @@ export default function App() {
           element={
             <PrivateRoute>
               <ServicioRoutes />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/configuracion/:id"
+          element={
+            <PrivateRoute>
+              <Configuracion />
             </PrivateRoute>
           }
         />

@@ -4,9 +4,6 @@ from rest_framework import serializers
 # models
 from api.models import User
 
-# serializers
-from api.serializers.rol import RolReadSerializer
-
 class UserBaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -22,7 +19,6 @@ class UserSerializer(serializers.ModelSerializer):
 
 class UserReadSerializer(serializers.ModelSerializer):
 
-    rol = serializers.SerializerMethodField()
    
     class Meta:
         model = User
@@ -39,8 +35,3 @@ class UserReadSerializer(serializers.ModelSerializer):
             'has_temp_pwd',
             'rol'
         )
-
-    def get_rol(self, obj):
-        if obj.rol is not None:
-            return RolReadSerializer(obj.rol, fields=('id', 'name')).data
-        return None

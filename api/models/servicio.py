@@ -18,9 +18,7 @@ class Servicio(BaseModel):
 
     tipo = models.IntegerField(choices=TIPOS_SERVICIOS, default=AGUA)
 
-    # Servira para aguardar en numero de perdio para los usuarios de cementerio
-    no_predio = models.IntegerField(blank=True, null=True)
-
     anio = models.SmallIntegerField()
     mes = models.SmallIntegerField()
     descripcion = models.TextField(blank=True, null=True)
+    sector = models.ForeignKey('api.Sector', on_delete=models.CASCADE, related_name='servicios')

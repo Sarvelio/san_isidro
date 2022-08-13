@@ -60,13 +60,22 @@ class User(BaseModel, AbstractUser):
         (INACTIVE, 'Inactivo'),
     )
 
+    OTHER = 0
+    ADMINISTRADOR = 1
+    CAJERO = 2
+    ROLES = (
+        (ADMINISTRADOR, 'Administrador'),
+        (CAJERO, 'Cajero'),
+        (OTHER, 'Otro'),
+    )
+
     birthday = models.DateField()
     gender = models.PositiveSmallIntegerField(choices=GENDERS)
     telephone = models.CharField(max_length=15, blank=True, null=True)
     status = models.PositiveIntegerField(choices=TYPE_STATUS, default=INACTIVE)
 
     # Rol
-    rol = models.ForeignKey('api.Rol', on_delete=models.CASCADE, related_name='users', null=True)
+    rol = models.PositiveSmallIntegerField(choices=ROLES, default=CAJERO)
 
     # To determinate if the user has a temporary password
     has_temp_pwd = models.BooleanField(default=False)

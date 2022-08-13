@@ -18,6 +18,10 @@ export default function Servicio() {
     if (_.get(data, "usuario.id", undefined) !== undefined) {
       body.usuario = data.usuario.id;
     }
+    delete body.sector;
+    if (_.get(data, "sector.id", undefined) !== undefined) {
+      body.sector = data.sector.id;
+    }
     if (!update) saveData(body);
     else updateData(body);
   };

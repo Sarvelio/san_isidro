@@ -54,10 +54,8 @@ export default function SectorForm({
           {
             name: "nombre",
             title: "Sector",
-            validations: ["required", "alphanumeric"],
+            validations: ["required"],
           },
-         
-         
         ].map((props, index) => {
           return (
             <InputMasterField

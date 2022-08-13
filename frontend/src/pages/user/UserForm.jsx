@@ -52,7 +52,6 @@ export default function UserForm({
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="w-full flex flex-wrap">
         {[
-          { type: "title", title: "Datos Personales" },
           { name: "first_name", title: "Nombre" },
           { name: "last_name", title: "Apellido" },
           { name: "birthday", title: "Fecha de Nacimiento", type: "date" },
@@ -65,27 +64,12 @@ export default function UserForm({
             ],
           },
           {
-            component: (
-              <div className="w-full sm:w-1/2 px-2 sm:px-6">
-                <div>
-                  <label htmlFor="test" className="label">
-                    Rol de usuario
-                  </label>
-                  <div className="control">
-                    <InputAsyncSelect
-                      control={control}
-                      loadOptions={asyncOptions}
-                      isSearchable={true}
-                      valueKey="id"
-                      labelKey="name"
-                      name="rol"
-                      rules={{ validate: required }}
-                      placeholder="Seleccione rol"
-                    />
-                  </div>
-                </div>
-              </div>
-            ),
+            name: "rol",
+            title: "Rol",
+            options: [
+              { value: 1, label: "Administrador" },
+              { value: 2, label: "Cajero" },
+            ],
           },
           {
             name: "username",

@@ -4,7 +4,6 @@ from api import viewsets
 
 router = DefaultRouter()
 router.register(r'user', viewsets.UserViewSet)
-router.register(r'rol', viewsets.RolViewSet)
 router.register(r'servicio', viewsets.ServicioViewSet)
 router.register(r'usuario', viewsets.UsuarioViewSet)
 router.register(r'sector', viewsets.SectorViewSet)
