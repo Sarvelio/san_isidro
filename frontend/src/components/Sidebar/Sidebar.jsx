@@ -23,7 +23,8 @@ function MenuItem({ Icon, title, to, user, allowTo = [], location }) {
       <NavLink
         to={to || "/"}
         end
-        className={`menu-link ${isActive ? "active" : ""}`}
+
+        className={`menu-link ${isActive ? "active" : ""} hover:-translate-y-1 hover:scale-1 duration-200`}
       >
         {/* {Icon && <Icon />} */}
         <span className="pl-2">{title}</span>
