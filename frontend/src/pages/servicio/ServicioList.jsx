@@ -26,12 +26,20 @@ export default function () {
         }),
       },
       {
-        Header: "Descripción",
-        accessor: "descripcion",
+        Header: "Nombre",
+        accessor: (a) => a.usuario.nombres,
+      },
+      {
+        Header: "DPI",
+        accessor: (a) => a.usuario.dpi,
       },
       {
         Header: "Año",
         accessor: "anio",
+      },
+      {
+        Header: "Mes",
+        accessor: "mes",
       },
     ],
     []

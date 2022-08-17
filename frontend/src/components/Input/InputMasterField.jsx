@@ -4,6 +4,7 @@ import {
   InputTextField,
   InputDateField,
 } from "../../components/Input";
+import { InputTextArea } from "../CustomInputs";
 
 const InputMasterField = ({
   name,
@@ -52,7 +53,19 @@ const InputMasterField = ({
         <InputDateField name={name} title={title} control={control} />
       </div>
     );
+  } else if (type === "textArea") {
+    return (
+      <div className="w-full sm:w-1/2 px-2 sm:px-6 py-1 ">
+        <InputTextArea
+          name={name}
+          title={title}
+          control={control}
+          validations={validations}
+        />
+      </div>
+    );
   }
+
   return (
     <label htmlFor="" className="label">
       -Tipo no definido-

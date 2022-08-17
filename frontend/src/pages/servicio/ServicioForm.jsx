@@ -54,8 +54,6 @@ export default function ServicioForm({
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="w-full flex flex-wrap">
         {[
-          { type: "title", title: "Datos del servicio" },
-
           {
             component: (
               <div className="w-full sm:w-1/2 px-2 sm:px-6">
@@ -78,6 +76,37 @@ export default function ServicioForm({
                 </div>
               </div>
             ),
+          },
+          {
+            component: (
+              <div className="w-full sm:w-1/2 px-2 sm:px-6">
+                <div>
+                  <label htmlFor="test" className="label">
+                    Sector
+                  </label>
+                  <div className="control">
+                    <InputAsyncSelect
+                      control={control}
+                      loadOptions={asyncOptionsSector}
+                      isSearchable={true}
+                      valueKey="id"
+                      labelKey="nombre"
+                      name="sector"
+                      rules={{ validate: required }}
+                      placeholder="Seleccione sector"
+                    />
+                  </div>
+                </div>
+              </div>
+            ),
+          },
+          {
+            name: "descripcion",
+            title: "Descripción",
+          },
+          {
+            type: "title",
+            title: "Ingrese la fecha que el usuario esta al dia con sus pagos",
           },
           {
             name: "anio",
@@ -110,33 +139,6 @@ export default function ServicioForm({
               { value: 11, label: "Noviembre" },
               { value: 12, label: "Diciembre" },
             ],
-          },
-          {
-            component: (
-              <div className="w-full sm:w-1/2 px-2 sm:px-6">
-                <div>
-                  <label htmlFor="test" className="label">
-                    Sector
-                  </label>
-                  <div className="control">
-                    <InputAsyncSelect
-                      control={control}
-                      loadOptions={asyncOptionsSector}
-                      isSearchable={true}
-                      valueKey="id"
-                      labelKey="nombre"
-                      name="sector"
-                      rules={{ validate: required }}
-                      placeholder="Seleccione sector"
-                    />
-                  </div>
-                </div>
-              </div>
-            ),
-          },
-          {
-            name: "descripcion",
-            title: "Descripción",
           },
         ].map((props, index) => {
           return (

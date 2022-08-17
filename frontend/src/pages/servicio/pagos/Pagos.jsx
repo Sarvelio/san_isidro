@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 
 export default function Sector() {
   const { idServicio } = useParams();
-  const urlList = `/servicio/${idServicio}/detalles`;
+  const urlList = `/servicio/${idServicio}/pagos`;
   const { saveData } = useCreate("pagos", urlList);
   const { data, updateData, update } = useUpdate("pagos", urlList);
   const loading = useSelector((state) => state.loading.loading);
@@ -17,12 +17,6 @@ export default function Sector() {
   const onSubmit = async (data) => {
     const body = { ...data };
     body.servicio = idServicio;
-    // borrar-datos
-    // body.descripcion = "borrar xd";
-    // body.monto = "123";
-    // body.tipo = 10;
-    // borrar-datos
-
 
     if (!update) saveData(body);
     else updateData(body);

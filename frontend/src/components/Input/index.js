@@ -2,4 +2,5 @@ import InputTextField from './InputTextField';
 import InputSelectField from './InputSelectField';
 import InputMasterField from './InputMasterField';
 import InputDateField from './InputDateField';
-export { InputTextField, InputSelectField, InputMasterField, InputDateField };
+import InputTextAreaField from './InputTextAreaField'
+export { InputTextField, InputSelectField, InputMasterField, InputDateField, InputTextAreaField };

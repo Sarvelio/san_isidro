@@ -7,6 +7,11 @@ import Button from "@mui/material/Button";
 import useList from "../../../hooks/useList";
 import useDelete from "../../../hooks/useDelete";
 import Search from "../../../components/Search/Search";
+import { setLoading } from "@redux/loadingSlice";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import _ from "lodash";
+import api from "api";
 
 export default function () {
   const { idServicio } = useParams();
@@ -15,6 +20,9 @@ export default function () {
   const [search, setSearch] = useState(null);
   const loading = useSelector((state) => state.loading.loading);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [dataUsuario, setDataUsuario] = useState({});
+
   const columns = useMemo(
     () => [
       {
@@ -44,10 +52,30 @@ export default function () {
     []
   );
 
+  const getDataUsuario = async (id) => {
+    dispatch(setLoading(true));
+    try {
+      const data = await api.get(`usuario/${id}`);
+      setDataUsuario(data);
+    } catch (e) {
+      let msj = "No se pudo obtener el registro";
+      if (e && e.detail) msj = e.detail;
+      else if (_.isArray(e)) msj = e[0];
+      toast.error(msj);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+
+  useEffect(() => {
+    getDataUsuario(idServicio);
+  }, []);
+
   return (
     <>
-      <div className="flex mb-2 sm:mb-0">
+      <div className="mb-2 sm:mb-0">
         <h1 className="text-title">Detalles del pago</h1>
+        <h1 className="text-title text-xl">{`Nombre: ${dataUsuario?.nombres} ${dataUsuario?.apellidos}, DPI:${dataUsuario?.dpi}`}</h1>
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-20 mt-4">
         <Search
