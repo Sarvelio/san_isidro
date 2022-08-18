@@ -15,6 +15,7 @@ import UsuarioRoutes from "./usuario";
 import ProyectoRoutes from "./proyecto";
 import Configuracion from "./configuracion/Configuracion";
 import ServicioRoutes from "./servicio";
+import CajaRoutes from "./caja";
 
 export default function App() {
   return (
@@ -74,6 +75,14 @@ export default function App() {
           element={
             <PrivateRoute>
               <Configuracion />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/caja/*"
+          element={
+            <PrivateRoute>
+              <CajaRoutes />
             </PrivateRoute>
           }
         />

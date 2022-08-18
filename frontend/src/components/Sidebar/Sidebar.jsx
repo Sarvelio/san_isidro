@@ -89,6 +89,13 @@ export default function SideBar({ className }) {
               location={location}
             />
             <MenuItem
+              title="Caja"
+              to="/caja"
+              Icon={() => <ConstructionIcon />}
+              user={user}
+              location={location}
+            />
+            <MenuItem
               title="Configuración"
               to="/configuracion/1"
               Icon={() => <ConstructionIcon />}
