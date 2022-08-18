@@ -9,39 +9,38 @@ from rest_framework.response import Response
 from api import serializers
 
 # Models
-from api.models import Pago, Servicio, Configuracion
+from api.models import Detalle, Servicio, Configuracion
 
 # Serializer
-from api.serializers import PagoBaseSerializer, PagoReadSerializer, PagoSaveSerializer
+from api.serializers import DetalleBaseSerializer, DetalleReadSerializer, DetalleSaveSerializer
 
 
 class PagoViewSet(viewsets.ModelViewSet):
-    serializer_class = PagoReadSerializer
-    queryset = Pago.objects.filter(active=True)
+    serializer_class = DetalleReadSerializer
+    queryset = Detalle.objects.filter(active=True, tipo_detalle=Detalle.PAGO)
 
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
     filterset_fields = ('servicio',)
-    search_fields = ("nombre",)
-    ordering_fields = ("id", "nombre")
+    search_fields = ("descripcion",)
+    ordering_fields = ("id", "descripcion")
 
     def get_serializer_class(self):
         """Define serializer for API"""
         async_options = self.request.query_params.get('async_options', False)
         if async_options:
-            return PagoBaseSerializer
+            return DetalleBaseSerializer
         if self.action == 'list' or self.action == 'retrieve':
-            return PagoReadSerializer
+            return DetalleReadSerializer
         else:
-            return PagoSaveSerializer
+            return DetalleSaveSerializer
 
     def create(self, request, *args, **kwargs):
         user = request.user.id
         data = request.data
         data['createdBy'] = user # user who created the record 
-
-
-
+        data['tipo_detalle'] = Detalle.PAGO # default value
+        data['tipo_movimiento'] = Detalle.INGRESO # default value
 
         with transaction.atomic():
             instancia_servicio = Servicio.objects.get(id=data['servicio'])
@@ -77,14 +76,16 @@ class PagoViewSet(viewsets.ModelViewSet):
                 else:
                     pago_mes_actual += 1
 
-                instancia_pago = Pago.objects.create(
+                instancia_pago = Detalle.objects.create(
                     servicio=instancia_servicio,
                     anio=pago_anio_actual,
                     mes=pago_mes_actual,
                     descripcion=data.get('descripcion', ''),
-                    pago=costo_mensual_agua
+                    monto=costo_mensual_agua,
+                    tipo_detalle=data['tipo_detalle'],
+                    tipo_movimiento=data['tipo_movimiento']
                 )
-                
+
         serializer = self.get_serializer(instancia_pago)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -101,3 +102,4 @@ class PagoViewSet(viewsets.ModelViewSet):
             serializer.save()
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+ 

@@ -18,12 +18,6 @@ export default function Sector() {
     const body = { ...data };
     body.proyecto = idProyecto;
 
-    // borrar-datos
-    // body.descripcion = "borrar xd";
-    // body.monto = "123";
-    // body.tipo = 10;
-    // borrar-datos
-
     if (!update) saveData(body);
     else updateData(body);
   };

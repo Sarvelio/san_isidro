@@ -16,7 +16,7 @@ from api.serializers import DetalleBaseSerializer, DetalleReadSerializer, Detall
 
 class DetalleViewSet(viewsets.ModelViewSet):
     serializer_class = DetalleReadSerializer
-    queryset = Detalle.objects.filter(active=True)
+    queryset = Detalle.objects.filter(active=True, tipo_detalle=Detalle.PROYECTO)
 
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
@@ -38,7 +38,7 @@ class DetalleViewSet(viewsets.ModelViewSet):
         user = request.user.id
         data = request.data
         data['createdBy'] = user # user who created the record 
-
+        data['tipo_detalle'] = Detalle.PROYECTO # default value
         with transaction.atomic():
             serializer = self.get_serializer(data=data)
             serializer.is_valid(raise_exception=True)

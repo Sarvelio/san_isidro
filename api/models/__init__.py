@@ -7,4 +7,3 @@ from .configuracion import Configuracion
 from .proyecto import Proyecto
 from .servicio import Servicio
 from .detalle import Detalle
-from .pago import Pago
