@@ -6,3 +6,4 @@ from .proyecto import ProyectoViewSet
 from .servicio import ServicioViewSet
 from .detalle import DetalleViewSet
 from .pago import PagoViewSet
+from .caja import CajaViewSet

@@ -10,30 +10,82 @@ import Search from "../../components/Search/Search";
 import OpacityIcon from '@mui/icons-material/Opacity';
 import PersonIcon from '@mui/icons-material/Person';
 
+const TIPOS_DETALLES = {
+"3": "Proyecto",
+"6": "Pago",
+"9": "Caja",
+}
+
+const TIPOS_MOVIMIENTOS = {
+  "10": "Ingreso",
+  "20": "Egreso",
+  "30": "Neutro",
+}
+
+const mostrarMonto = (row, tipo_mov) => {
+  if (TIPOS_MOVIMIENTOS[row.tipo_movimiento]===tipo_mov) {
+    return row.monto
+  } 
+  return 0
+}
+
 export default function () {
-  const { data, page, getData } = useList("proyecto");
-  const { deleteData } = useDelete("proyecto");
+  const { data, page, getData } = useList("caja");
+  const { deleteData } = useDelete("caja");
   const [search, setSearch] = useState(null);
   const loading = useSelector((state) => state.loading.loading);
   const navigate = useNavigate();
+
 
   const columns = useMemo(
     () => [
       {
         Header: "Herramientas",
         accessor: tableActions({
-          edit: (id) => navigate(`/proyecto/${id}`),
+          edit: (id) => navigate(`/caja/${id}`),
           remove: (id) => deleteData(id, () => getData(1, { search: search })),
-          detallesProyecto: (id) => navigate(`/proyecto/${id}/detalles`),
+          // detallesProyecto: (id) => navigate(`/proyecto/${id}/detalles`),
         }),
+      },
+
+      {
+        Header: "Tipo detalle",
+        accessor: (row) => TIPOS_DETALLES[row.tipo_detalle],
       },
       {
         Header: "Nombre",
-        accessor: "nombre",
+        accessor: (row) => {
+          if (TIPOS_DETALLES[row.tipo_detalle]==="Pago") {
+              return row.usuario.nombres + " " + row.usuario.apellidos
+            }
+            return ""
+
+          }
       },
       {
         Header: "Tipo",
-        accessor: "tipo",
+        accessor: (row) => TIPOS_MOVIMIENTOS[row.tipo_movimiento],
+      },
+      {
+        Header: "Descripción",
+        accessor: "descripcion",
+      },
+      
+      {
+        Header: "Neutro",
+        accessor: (row) => mostrarMonto(row, "Neutro")
+      },      
+      {
+        Header: "Ingreso",
+        accessor: (row) => mostrarMonto(row, "Ingreso")
+      },
+      {
+        Header: "Egreso",
+        accessor: (row) => mostrarMonto(row, "Egreso")
+      },
+      {
+        Header: "Saldo",
+        accessor: (row) => 0
       },
     ],
     []

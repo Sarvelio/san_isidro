@@ -1,6 +1,7 @@
 from django.db import models
 
 from api.models import BaseModel
+from .managers import DetalleManager
 
 
 class Detalle(BaseModel):
@@ -67,3 +68,5 @@ class Detalle(BaseModel):
     descripcion = models.TextField(blank=True, null=True)
 
     monto = models.FloatField()
+
+    objects = DetalleManager()
