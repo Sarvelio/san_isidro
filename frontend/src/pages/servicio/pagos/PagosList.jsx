@@ -55,7 +55,7 @@ export default function () {
   const getDataUsuario = async (id) => {
     dispatch(setLoading(true));
     try {
-      const data = await api.get(`usuario/${id}`);
+      const data = await api.get(`usuario/servicio`, { params: { id } });
       setDataUsuario(data);
     } catch (e) {
       let msj = "No se pudo obtener el registro";

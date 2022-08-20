@@ -54,7 +54,7 @@ export default function PagosForm({
   const getDataUsuario = async (id) => {
     dispatch(setLoading(true));
     try {
-      const data = await api.get(`usuario/${id}`);
+      const data = await api.get(`usuario/servicio`, { params: { id } });
       setDataUsuario(data);
     } catch (e) {
       let msj = "No se pudo obtener el registro";
@@ -80,7 +80,7 @@ export default function PagosForm({
         <div className="w-full">
           <h1 className="text-title text-xl">{`Nombre: ${dataUsuario?.nombres} ${dataUsuario?.apellidos}, DPI:${dataUsuario?.dpi}`}</h1>
           <h1 className="text-title text-xl">
-            Ultimo mes pagado: Enero del 2021
+            {/* Ultimo mes pagado: Enero del 2021 */}
           </h1>
         </div>
         {[
