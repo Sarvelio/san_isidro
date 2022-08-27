@@ -15,7 +15,7 @@ from api.serializers import ServicioBaseSerializer, ServicioReadSerializer, Serv
 
 class ServicioViewSet(viewsets.ModelViewSet):
     serializer_class = ServicioReadSerializer
-    queryset = Servicio.objects.filter(active=True)
+    queryset = Servicio.objects.filter(active=True).order_by('-created')
 
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)

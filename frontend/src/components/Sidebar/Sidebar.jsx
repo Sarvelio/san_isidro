@@ -23,8 +23,9 @@ function MenuItem({ Icon, title, to, user, allowTo = [], location }) {
       <NavLink
         to={to || "/"}
         end
-
-        className={`menu-link ${isActive ? "active" : ""} hover:-translate-y-1 hover:scale-1 duration-200`}
+        className={`menu-link ${
+          isActive ? "active" : ""
+        } hover:-translate-y-1 hover:scale-1 duration-200`}
       >
         {/* {Icon && <Icon />} */}
         <span className="pl-2">{title}</span>
@@ -103,7 +104,7 @@ export default function SideBar({ className }) {
               location={location}
             />
             <li className="menu-item my-2 mt-36" onClick={() => {}}>
-              <div className="menu-link  text-red-600" onClick={logOut}>
+              <div className="menu-link" onClick={logOut}>
                 <DoorBackIcon />
                 <span className="pl-2 ">Cerrar Sesión</span>
               </div>

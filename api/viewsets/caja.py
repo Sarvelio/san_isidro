@@ -13,16 +13,19 @@ from api.models import Detalle
 # Serializer
 from api.serializers import DetalleBaseSerializer, DetalleReadSerializer, DetalleSaveSerializer
 
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 class CajaViewSet(viewsets.ModelViewSet):
     serializer_class = DetalleReadSerializer
-    queryset = Detalle.objects.filter(active=True)
+    queryset = Detalle.objects.filter(active=True).order_by('-created')
+
+    permission_classes = [AllowAny]
 
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
     filterset_fields = ('proyecto',)
-    search_fields = ("descripcion")
-    ordering_fields = ("-created")
+    search_fields = ("descripcion",)
+    ordering_fields = ('id','created')
 
     def get_serializer_class(self):
         """Define serializer for API"""
