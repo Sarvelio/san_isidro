@@ -33,6 +33,14 @@ export default function () {
         accessor: "last_name",
       },
       {
+        Header: "Nombre de usuario",
+        accessor: "username",
+      },
+      {
+        Header: "Rol",
+        accessor: "rol_text",
+      },
+      {
         Header: "Email",
         accessor: "email",
       },
