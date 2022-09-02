@@ -9,32 +9,38 @@ import useDelete from "../../hooks/useDelete";
 import Search from "../../components/Search/Search";
 
 export default function () {
-  const { data, page, getData } = useList("user");
-  const { deleteData } = useDelete("user");
+  const { data, page, getData } = useList("servicio/morosos");
   const [search, setSearch] = useState(null);
   const loading = useSelector((state) => state.loading.loading);
   const navigate = useNavigate();
 
   const columns = useMemo(
     () => [
-    //   {
-    //     Header: "Herramientas",
-    //     accessor: tableActions({
-    //       edit: (id) => navigate(`/user/${id}`),
-    //       remove: (id) => deleteData(id, () => getData(1, { search: search })),
-    //     }),
-    //   },
       {
-        Header: "Nombres",
-        accessor: "first_name",
+        Header: " ",
+        accessor: tableActions({
+          detallesPagos: (id) => navigate(`/servicio/${id}/pagos`),
+        }),
       },
       {
-        Header: "Apellidos",
-        accessor: "last_name",
+        Header: "Nombre",
+        accessor: (a) => a.usuario.nombres,
       },
       {
-        Header: "Email",
-        accessor: "email",
+        Header: "DPI",
+        accessor: (a) => a.usuario.dpi,
+      },
+      {
+        Header: "Sector",
+        accessor: (a) => a.sector.nombre,
+      },
+      {
+        Header: "Descripción",
+        accessor: (a) => a.descripcion,
+      },
+      {
+        Header: "Fecha Solvente",
+        accessor: (a) => a.mes_text + " de " + a.anio,
       },
     ],
     []
@@ -42,45 +48,22 @@ export default function () {
 
   return (
     <>
-    <div className="rounded-lg overflow-hidden shadow-2xl p-5">
-
-      <div className="flex mb-2 sm:mb-0 ">
-        <h1 className="text-title">Usuarios</h1>
+      <div className="rounded-lg overflow-hidden shadow-2xl p-5">
+        <div className="flex mb-2 sm:mb-0 ">
+          <h1 className="text-title">Servicios morosos</h1>
+        </div>
+        <br />
+        <LoadMask>
+          <Table
+            columns={columns}
+            data={data.results}
+            pageCount={data.count}
+            loading={loading}
+            currentPage={page}
+            onPageChange={(page) => getData(page, { search: search })}
+          />
+        </LoadMask>
       </div>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-20 mt-4">
-        {/* <Search
-          className="w-full"
-          onSearch={(value) => {
-            getData(1, {
-              search: value,
-            }).then();
-            setSearch(value);
-          }}
-        /> */}
-        {/* <div className="flex justify-start sm:justify-end">
-          <Button
-            component={RouterLink}
-            disableElevation
-            variant="contained"
-            to="/user/create"
-          >
-            Agregar
-          </Button>
-        </div> */}
-      </div>
-      <br />
-      <LoadMask>
-        <Table
-          columns={columns}
-          data={data.results}
-          pageCount={data.count}
-          loading={loading}
-          currentPage={page}
-          onPageChange={(page) => getData(page, { search: search })}
-        />
-      </LoadMask>
-    </div>
-
     </>
   );
 }

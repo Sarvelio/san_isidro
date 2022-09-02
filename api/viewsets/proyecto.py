@@ -15,7 +15,7 @@ from api.serializers import ProyectoBaseSerializer, ProyectoReadSerializer, Proy
 
 class ProyectoViewSet(viewsets.ModelViewSet):
     serializer_class = ProyectoReadSerializer
-    queryset = Proyecto.objects.filter(active=True)
+    queryset = Proyecto.objects.filter(active=True).order_by('-created')
 
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)

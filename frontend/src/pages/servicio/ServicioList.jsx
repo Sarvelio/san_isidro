@@ -34,12 +34,16 @@ export default function () {
         accessor: (a) => a.usuario.dpi,
       },
       {
-        Header: "Año",
-        accessor: "anio",
+        Header: "Sector",
+        accessor: (a) => a.sector.nombre,
       },
       {
-        Header: "Mes",
-        accessor: "mes",
+        Header: "Descripción",
+        accessor: (a) => a.descripcion,
+      },
+      {
+        Header: "Fecha Solvente",
+        accessor: (a) => a.mes_text + " de " + a.anio,
       },
     ],
     []

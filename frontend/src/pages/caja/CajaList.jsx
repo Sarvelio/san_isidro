@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Table, { tableActions } from "../../components/Table";
@@ -9,24 +9,17 @@ import useDelete from "../../hooks/useDelete";
 import Search from "../../components/Search/Search";
 import OpacityIcon from "@mui/icons-material/Opacity";
 import PersonIcon from "@mui/icons-material/Person";
-
-const TIPOS_DETALLES = {
-  3: "Proyecto",
-  6: "Pago",
-  9: "Caja",
-};
-
-const TIPOS_MOVIMIENTOS = {
-  10: "Ingreso",
-  20: "Egreso",
-  30: "Neutro",
-};
+import { setLoading } from "@redux/loadingSlice";
+import { useDispatch } from "react-redux";
+import _ from "lodash";
+import api from "api";
+import { toast } from "react-toastify";
 
 const mostrarMonto = (row, tipo_mov) => {
-  if (TIPOS_MOVIMIENTOS[row.tipo_movimiento] === tipo_mov) {
-    return row.monto;
+  if (row.tipo_movimiento_text === tipo_mov) {
+    return "Q " + row.monto;
   }
-  return 0;
+  return "-";
 };
 
 export default function () {
@@ -35,34 +28,49 @@ export default function () {
   const [search, setSearch] = useState(null);
   const loading = useSelector((state) => state.loading.loading);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [dataCaja, setDataCaja] = useState({});
+
+  const getDataCaja = async () => {
+    dispatch(setLoading(true));
+    try {
+      const data = await api.get(`caja/total_actual`);
+      setDataCaja(data);
+    } catch (e) {
+      let msj = "No se pudo obtener el registro";
+      if (e && e.detail) msj = e.detail;
+      else if (_.isArray(e)) msj = e[0];
+      toast.error(msj);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+
+  useEffect(() => {
+    getDataCaja();
+  }, []);
 
   const columns = useMemo(
     () => [
       {
         Header: "Herramientas",
-        accessor: tableActions({
-          edit: (id) => navigate(`/caja/${id}`),
-          remove: (id) => deleteData(id, () => getData(1, { search: search })),
-          // detallesProyecto: (id) => navigate(`/proyecto/${id}/detalles`),
-        }),
+        accessor: (row) =>
+          row.tipo_detalle_text == "Caja"
+            ? tableActions({
+                edit: (id) => navigate(`/caja/${id}`),
+                remove: (id) =>
+                  deleteData(id, () => getData(1, { search: search })),
+              })(row)
+            : null,
       },
 
       {
         Header: "Tipo detalle",
-        accessor: (row) => TIPOS_DETALLES[row.tipo_detalle],
+        accessor: "tipo_detalle_text",
       },
       {
         Header: "Nombre",
-        accessor: (row) => {
-          if (TIPOS_DETALLES[row.tipo_detalle] === "Pago") {
-            return row.usuario.nombres + " " + row.usuario.apellidos;
-          }
-          return "";
-        },
-      },
-      {
-        Header: "Tipo",
-        accessor: (row) => TIPOS_MOVIMIENTOS[row.tipo_movimiento],
+        accessor: "nombre",
       },
       {
         Header: "Descripción",
@@ -95,7 +103,7 @@ export default function () {
                 Monto Ingresado
               </div>
               <span className="text-cyan-600 justify-self-end m-1 font-bold text-xl">
-                Q 1,200
+                Q {dataCaja.monto_ingresado}
               </span>
             </div>
           </div>
@@ -107,7 +115,7 @@ export default function () {
                 Monto Egresado
               </div>
               <span className="text-cyan-600 justify-self-end m-1 font-bold text-xl">
-                Q 500
+                Q {dataCaja.monto_egresado}
               </span>
             </div>
           </div>
@@ -119,7 +127,7 @@ export default function () {
                 Monto Neutro
               </div>
               <span className="text-cyan-600 justify-self-end m-1 font-bold text-xl">
-                Q 450
+                Q {dataCaja.monto_neutro}
               </span>
             </div>
           </div>
@@ -131,7 +139,7 @@ export default function () {
                 Monto disponible
               </div>
               <span className="text-cyan-600 justify-self-end m-1 font-bold text-xl">
-                Q 700
+                Q {dataCaja.monto_disponible}
               </span>
             </div>
           </div>

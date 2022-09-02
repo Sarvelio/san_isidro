@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import useList from "../../../hooks/useList";
 import useDelete from "../../../hooks/useDelete";
 import Search from "../../../components/Search/Search";
+import dayjs from "dayjs";
 
 export default function () {
   const { idProyecto } = useParams();
@@ -25,15 +26,19 @@ export default function () {
         }),
       },
       {
-        Header: "tipo",
-        accessor: "tipo",
-      },
-      {
-        Header: "descripcion",
+        Header: "Descripcion",
         accessor: "descripcion",
       },
       {
-        Header: "monto",
+        Header: "Fecha y Hora de registro",
+        accessor: (row) => dayjs(row.created).format("DD/MM/YYYY hh:mm a"),
+      },
+      {
+        Header: "Tipo",
+        accessor: "tipo_movimiento_text",
+      },
+      {
+        Header: "Monto",
         accessor: "monto",
       },
     ],

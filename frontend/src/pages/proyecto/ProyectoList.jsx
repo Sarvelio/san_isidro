@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import useList from "../../hooks/useList";
 import useDelete from "../../hooks/useDelete";
 import Search from "../../components/Search/Search";
+import dayjs from "dayjs";
 
 export default function () {
   const { data, page, getData } = useList("proyecto");
@@ -30,8 +31,27 @@ export default function () {
         accessor: "nombre",
       },
       {
-        Header: "Tipo",
-        accessor: "tipo",
+        Header: "Ingreso",
+        accessor: (row) => row.montos.ingreso,
+      },
+      {
+        Header: "Egreso",
+        accessor: (row) => row.montos.egreso,
+      },
+      {
+        Header: "Neutro",
+        accessor: (row) => row.montos.neutro,
+      },
+      {
+        Header: "Total Costo",
+        accessor: (row) => row.montos.gasto,
+      },
+      {
+        Header: "Fecha Inicio y Fin",
+        accessor: (row) =>
+          dayjs(row.fecha_inicio).format("DD/MM/YYYY") +
+          " al " +
+          dayjs(row.fecha_fin).format("DD/MM/YYYY"),
       },
     ],
     []

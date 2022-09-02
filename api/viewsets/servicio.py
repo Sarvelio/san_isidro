@@ -5,6 +5,8 @@ from django.db import transaction
 from rest_framework import viewsets, filters, status
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
+from rest_framework.decorators import action
+from django.utils import timezone
 
 # Models
 from api.models import Servicio
@@ -28,7 +30,7 @@ class ServicioViewSet(viewsets.ModelViewSet):
         async_options = self.request.query_params.get('async_options', False)
         if async_options:
             return ServicioBaseSerializer
-        if self.action == 'list' or self.action == 'retrieve':
+        if self.action == 'list' or self.action == 'retrieve' or self.action == 'morosos':
             return ServicioReadSerializer
         else:
             return ServicioSaveSerializer
@@ -57,3 +59,16 @@ class ServicioViewSet(viewsets.ModelViewSet):
             serializer.save()
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    @action(methods=["get"], detail=False)
+    def morosos(self, request, *args, **kwargs):
+        anio = timezone.now().year
+        mes = timezone.now().month
+
+        queryset = self.filter_queryset(self.get_queryset().filter(anio__lte=anio, mes__lte=mes))
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)

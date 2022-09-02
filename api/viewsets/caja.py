@@ -6,6 +6,7 @@ from django.db import transaction
 from rest_framework import viewsets, filters, status
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
+from rest_framework.decorators import action
 
 # Models
 from api.models import Detalle
@@ -14,6 +15,9 @@ from api.models import Detalle
 from api.serializers import DetalleBaseSerializer, DetalleReadSerializer, DetalleSaveSerializer
 
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from django.db.models import Sum
+from django.db.models.functions import Coalesce
+
 
 class CajaViewSet(viewsets.ModelViewSet):
     serializer_class = DetalleReadSerializer
@@ -61,3 +65,15 @@ class CajaViewSet(viewsets.ModelViewSet):
             serializer.save()
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    @action(methods=["get"], detail=False)
+    def total_actual(self, request, *args, **kwargs):
+        monto_ingresado = Detalle.objects.filter(active=True, tipo_movimiento=Detalle.INGRESO).aggregate(monto_ingresado=Coalesce(Sum('monto'),0.0))['monto_ingresado']
+        monto_egresado = Detalle.objects.filter(active=True, tipo_movimiento=Detalle.EGRESO).aggregate(monto_egresado=Coalesce(Sum('monto'),0.0))['monto_egresado']
+        monto_neutro = Detalle.objects.filter(active=True, tipo_movimiento=Detalle.NEUTRO).aggregate(monto_neutro=Coalesce(Sum('monto'),0.0))['monto_neutro']
+        monto_disponible = monto_ingresado - monto_egresado
+
+        return Response({'monto_ingresado': monto_ingresado,
+        'monto_egresado': monto_egresado,
+        'monto_neutro': monto_neutro,
+        'monto_disponible':monto_disponible},status=status.HTTP_200_OK)

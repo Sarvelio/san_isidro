@@ -17,6 +17,7 @@ class ServicioBaseSerializer(serializers.ModelSerializer):
 class ServicioReadSerializer(serializers.ModelSerializer):
     sector = serializers.SerializerMethodField()
     usuario = serializers.SerializerMethodField()
+    mes_text = serializers.CharField(source='get_mes_display')
 
     class Meta:
         model = Servicio
