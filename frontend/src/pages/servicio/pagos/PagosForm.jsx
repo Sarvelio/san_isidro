@@ -48,14 +48,14 @@ export default function PagosForm({
   } = useForm();
   const dispatch = useDispatch();
   const { idServicio } = useParams();
-  const [dataUsuario, setDataUsuario] = useState({});
+  const [dataServicio, setDataServicio] = useState({});
   const watchMesesPagar = watch("meses_a_pagar");
 
-  const getDataUsuario = async (id) => {
+  const getDataServicio = async (id) => {
     dispatch(setLoading(true));
     try {
-      const data = await api.get(`usuario/servicio`, { params: { id } });
-      setDataUsuario(data);
+      const data = await api.get(`servicio/${id}`);
+      setDataServicio(data);
     } catch (e) {
       let msj = "No se pudo obtener el registro";
       if (e && e.detail) msj = e.detail;
@@ -67,7 +67,7 @@ export default function PagosForm({
   };
 
   useEffect(() => {
-    getDataUsuario(idServicio);
+    getDataServicio(idServicio);
   }, []);
 
   useEffect(() => {
@@ -78,10 +78,8 @@ export default function PagosForm({
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="w-full flex flex-wrap">
         <div className="w-full">
-          <h1 className="text-title text-xl">{`Nombre: ${dataUsuario?.nombres} ${dataUsuario?.apellidos}, DPI:${dataUsuario?.dpi}`}</h1>
-          <h1 className="text-title text-xl">
-            {/* Ultimo mes pagado: Enero del 2021 */}
-          </h1>
+          <h1 className="text-title text-xl">{`Nombre: ${dataServicio?.usuario?.nombres} ${dataServicio?.usuario?.apellidos}, DPI:${dataServicio?.usuario?.dpi}`}</h1>
+          <h1 className="text-title text-xl">{`Fecha Solvente, ${dataServicio.fecha_solvente}`}</h1>
         </div>
         {[
           { type: "title", title: "Detalles del pago" },
@@ -93,7 +91,7 @@ export default function PagosForm({
                     Costo del servicio por mes:
                   </label>
                   <div className="control">
-                    <p>Q {dataUsuario?.costo_mensual}</p>
+                    <p>Q {dataServicio?.costo_mensual}</p>
                   </div>
                 </div>
               </div>
@@ -108,7 +106,7 @@ export default function PagosForm({
                     Total a pagar:
                   </label>
                   <div className="control">
-                    <p>Q {watchMesesPagar * dataUsuario?.costo_mensual}</p>
+                    <p>Q {watchMesesPagar * dataServicio?.costo_mensual}</p>
                   </div>
                 </div>
               </div>

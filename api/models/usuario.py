@@ -20,8 +20,6 @@ class Usuario(BaseModel):
   nombres = models.CharField(max_length=250)
   apellidos = models.CharField(max_length=250)
   dpi = models.CharField(max_length=13, unique=True)
-  foto = models.ImageField(upload_to='usuario/foto/', null=True, blank=True)
   telefono = models.CharField(max_length=15, blank=True, null=True)
-
 
 

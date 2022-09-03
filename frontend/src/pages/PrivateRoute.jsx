@@ -13,7 +13,7 @@ export default function PrivateRoutes(props) {
   const isAuthenticated = () => {
     if (user && user.username) {
       return true;
-    } else if (user && user.has_temp_pwd && !url.includes("change-password")) {
+    } else if (user) {
       navigate(`/change-password/${user.username}`);
     } else {
       if (!loading) getMe();

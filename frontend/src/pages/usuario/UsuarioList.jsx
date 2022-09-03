@@ -32,6 +32,18 @@ export default function () {
         Header: "Apellidos",
         accessor: "apellidos",
       },
+      {
+        Header: "DPI",
+        accessor: "dpi",
+      },
+      {
+        Header: "Teléfono",
+        accessor: "telefono",
+      },
+      {
+        Header: "Genero",
+        accessor: "genero_text",
+      },
     ],
     []
   );

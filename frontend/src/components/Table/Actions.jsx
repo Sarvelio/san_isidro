@@ -6,8 +6,7 @@ import FactCheckIcon from "@mui/icons-material/FactCheck";
 import Swal from "sweetalert2";
 import { SwalWarning } from "../SwalAlerts";
 import StickyNote2Icon from "@mui/icons-material/StickyNote2";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-
+import MoneyIcon from "@mui/icons-material/Money";
 
 function Actions({
   id,
@@ -96,7 +95,7 @@ function Actions({
             onClick={detallesPagosAction}
             title="Detalle del pago"
           >
-            <AttachMoneyIcon color="primary" />
+            <MoneyIcon color="primary" />
           </a>
         )}
       </div>

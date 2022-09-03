@@ -21,7 +21,7 @@ export default function () {
   const loading = useSelector((state) => state.loading.loading);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [dataUsuario, setDataUsuario] = useState({});
+  const [dataServicio, setDataServicio] = useState({});
 
   const columns = useMemo(
     () => [
@@ -52,11 +52,11 @@ export default function () {
     []
   );
 
-  const getDataUsuario = async (id) => {
+  const getDataServicio = async (id) => {
     dispatch(setLoading(true));
     try {
-      const data = await api.get(`usuario/servicio`, { params: { id } });
-      setDataUsuario(data);
+      const data = await api.get(`servicio/${id}`);
+      setDataServicio(data);
     } catch (e) {
       let msj = "No se pudo obtener el registro";
       if (e && e.detail) msj = e.detail;
@@ -68,14 +68,15 @@ export default function () {
   };
 
   useEffect(() => {
-    getDataUsuario(idServicio);
+    getDataServicio(idServicio);
   }, []);
 
   return (
     <>
       <div className="mb-2 sm:mb-0">
         <h1 className="text-title">Detalles del pago</h1>
-        <h1 className="text-title text-xl">{`Nombre: ${dataUsuario?.nombres} ${dataUsuario?.apellidos}, DPI:${dataUsuario?.dpi}`}</h1>
+        <h1 className="text-title text-xl">{`Nombre: ${dataServicio?.usuario?.nombres} ${dataServicio?.usuario?.apellidos}, DPI:${dataServicio?.usuario?.dpi}`}</h1>
+        <h1 className="text-title text-xl">{`Fecha Solvente, ${dataServicio.fecha_solvente}`}</h1>
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-20 mt-4">
         <Search

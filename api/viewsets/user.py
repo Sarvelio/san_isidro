@@ -133,7 +133,6 @@ class UserViewSet(viewsets.ModelViewSet):
             if user_password is None:
                 temp_pwd = generate_temporary_password()
                 user.set_password(temp_pwd)
-                user.has_temp_pwd = True
                 user.save()
                 send_mail_temporary_password(
                     user, temp_pwd, data.get('email', None))
@@ -260,7 +259,6 @@ class UserViewSet(viewsets.ModelViewSet):
         user = self.request.user
         validatePassword(data.get('password', ''))
         user.set_password(data.get('password', ''))
-        user.has_temp_pwd = False
         user.save()
         return Response(status=status.HTTP_200_OK)
 
@@ -269,7 +267,6 @@ class UserViewSet(viewsets.ModelViewSet):
         user = self.get_object()
         temp_pwd = generate_temporary_password()
         user.set_password(temp_pwd)
-        user.has_temp_pwd = True
         user.save()
         send_mail_temporary_password(user, temp_pwd)
         return Response()

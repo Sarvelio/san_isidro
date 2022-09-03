@@ -49,7 +49,6 @@ class User(BaseModel, AbstractUser):
         (OTHER, 'Otro'),
     )
 
-    # Status
     ACTIVE = 1
     PENDING = 2
     INACTIVE = 3
@@ -74,13 +73,7 @@ class User(BaseModel, AbstractUser):
     telephone = models.CharField(max_length=15, blank=True, null=True)
     status = models.PositiveIntegerField(choices=TYPE_STATUS, default=INACTIVE)
 
-    # Rol
     rol = models.PositiveSmallIntegerField(choices=ROLES, default=CAJERO)
-
-    # To determinate if the user has a temporary password
-    has_temp_pwd = models.BooleanField(default=False)
-
-    # Overring the default manager
     objects = CustomUserManager()
 
 

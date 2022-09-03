@@ -13,6 +13,7 @@ from api.models.servicio import Servicio
 
 # Serializer
 from api.serializers import UsuarioBaseSerializer, UsuarioReadSerializer, UsuarioSaveSerializer
+from api.serializers.servicio import ServicioReadSerializer
 
 
 class UsuarioViewSet(viewsets.ModelViewSet):
@@ -59,10 +60,3 @@ class UsuarioViewSet(viewsets.ModelViewSet):
             serializer.save()
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    
-    @action(methods=["get"], detail=False)
-    def servicio(self, request, *args, **kwargs):
-        id_servicio = request.query_params.get('id', None)
-        user = Servicio.objects.get(id=id_servicio).usuario
-        serializer = UsuarioReadSerializer(user)
-        return Response(serializer.data, status=status.HTTP_200_OK)

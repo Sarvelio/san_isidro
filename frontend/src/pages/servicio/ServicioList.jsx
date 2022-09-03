@@ -39,11 +39,11 @@ export default function () {
       },
       {
         Header: "Descripción",
-        accessor: (a) => a.descripcion,
+        accessor: "descripcion",
       },
       {
         Header: "Fecha Solvente",
-        accessor: (a) => a.mes_text + " de " + a.anio,
+        accessor: "fecha_solvente",
       },
     ],
     []

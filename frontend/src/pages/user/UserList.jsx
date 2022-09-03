@@ -44,6 +44,10 @@ export default function () {
         Header: "Email",
         accessor: "email",
       },
+      {
+        Header: "Estado",
+        accessor: "status_text",
+      },
     ],
     []
   );

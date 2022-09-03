@@ -15,17 +15,12 @@ class UsuarioBaseSerializer(serializers.ModelSerializer):
 
 
 class UsuarioReadSerializer(serializers.ModelSerializer):
-    costo_mensual = serializers.SerializerMethodField()
+    genero_text = serializers.CharField(source='get_genero_display')
+
     class Meta:
         model = Usuario
         fields =  '__all__'
 
-    def get_costo_mensual(self, obj):
-        try:
-            configuraciones = Configuracion.objects.all().last()
-            return configuraciones.cuota_agua
-        except Exception as e:
-            return 0
 
 class UsuarioSaveSerializer(serializers.ModelSerializer):
     class Meta:

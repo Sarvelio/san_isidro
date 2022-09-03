@@ -19,6 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class UserReadSerializer(serializers.ModelSerializer):
     rol_text = serializers.CharField(source='get_rol_display')
+    status_text = serializers.CharField(source='get_status_display')
 
    
     class Meta:
@@ -31,9 +32,9 @@ class UserReadSerializer(serializers.ModelSerializer):
             'birthday',
             'gender',
             'status',
+            'status_text',
             'email',
             'telephone',
-            'has_temp_pwd',
             'rol',
             'rol_text'
         )

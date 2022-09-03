@@ -50,7 +50,7 @@ export default function () {
     <>
       <div className="rounded-lg overflow-hidden shadow-2xl p-5">
         <div className="flex mb-2 sm:mb-0 ">
-          <h1 className="text-title">Servicios morosos</h1>
+          <h1 className="text-title">Servicios de agua morosos</h1>
         </div>
         <br />
         <LoadMask>
