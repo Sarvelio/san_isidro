@@ -7,11 +7,8 @@ import Button from "@mui/material/Button";
 import useList from "../../../hooks/useList";
 import useDelete from "../../../hooks/useDelete";
 import Search from "../../../components/Search/Search";
-import { setLoading } from "@redux/loadingSlice";
-import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import _ from "lodash";
-import api from "api";
+import useGet from "../../../hooks/useGet";
+import { formatNumberMoney } from "../../../utils";
 
 export default function () {
   const { idServicio } = useParams();
@@ -20,8 +17,7 @@ export default function () {
   const [search, setSearch] = useState(null);
   const loading = useSelector((state) => state.loading.loading);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [dataServicio, setDataServicio] = useState({});
+  const { data: dataServicio, getData: getDataServicio } = useGet();
 
   const columns = useMemo(
     () => [
@@ -34,41 +30,26 @@ export default function () {
       },
       {
         Header: "mes",
-        accessor: "mes",
+        accessor: "mes_text",
       },
       {
         Header: "año",
         accessor: "anio",
       },
-      // {
-      //   Header: "descripcion",
-      //   accessor: "descripcion",
-      // },
+      {
+        Header: "descripcion",
+        accessor: "descripcion",
+      },
       {
         Header: "monto",
-        accessor: "monto",
+        accessor: (a) => formatNumberMoney(a.monto),
       },
     ],
     []
   );
 
-  const getDataServicio = async (id) => {
-    dispatch(setLoading(true));
-    try {
-      const data = await api.get(`servicio/${id}`);
-      setDataServicio(data);
-    } catch (e) {
-      let msj = "No se pudo obtener el registro";
-      if (e && e.detail) msj = e.detail;
-      else if (_.isArray(e)) msj = e[0];
-      toast.error(msj);
-    } finally {
-      dispatch(setLoading(false));
-    }
-  };
-
   useEffect(() => {
-    getDataServicio(idServicio);
+    getDataServicio(`servicio/${idServicio}`);
   }, []);
 
   return (

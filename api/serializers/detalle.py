@@ -18,6 +18,7 @@ class DetalleReadSerializer(serializers.ModelSerializer):
     nombre = serializers.SerializerMethodField()
     tipo_detalle_text = serializers.CharField(source='get_tipo_detalle_display')
     tipo_movimiento_text = serializers.CharField(source='get_tipo_movimiento_display')
+    mes_text = serializers.CharField(source='get_mes_display')
 
 
     class Meta:

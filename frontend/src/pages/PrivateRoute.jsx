@@ -13,8 +13,6 @@ export default function PrivateRoutes(props) {
   const isAuthenticated = () => {
     if (user && user.username) {
       return true;
-    } else if (user) {
-      navigate(`/change-password/${user.username}`);
     } else {
       if (!loading) getMe();
     }

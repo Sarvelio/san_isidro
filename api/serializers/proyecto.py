@@ -21,15 +21,15 @@ class ProyectoReadSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def get_monto_ingreso(self, obj):
-        monto_ingreso = obj.detalles.filter(tipo_movimiento=Detalle.INGRESO).aggregate(monto_ingreso=Sum('monto'))['monto_ingreso'] or 0
+        monto_ingreso = obj.detalles.filter(active=True, tipo_movimiento=Detalle.INGRESO).aggregate(monto_ingreso=Sum('monto'))['monto_ingreso'] or 0
         return monto_ingreso
 
     def get_monto_egreso(self, obj):
-        monto_egreso = obj.detalles.filter(tipo_movimiento=Detalle.EGRESO).aggregate(monto_egreso=Sum('monto'))['monto_egreso'] or 0
+        monto_egreso = obj.detalles.filter(active=True, tipo_movimiento=Detalle.EGRESO).aggregate(monto_egreso=Sum('monto'))['monto_egreso'] or 0
         return monto_egreso
 
     def get_monto_neutro(self, obj):
-        monto_neutro = obj.detalles.filter(tipo_movimiento=Detalle.NEUTRO).aggregate(monto_neutro=Sum('monto'))['monto_neutro'] or 0
+        monto_neutro = obj.detalles.filter(active=True, tipo_movimiento=Detalle.NEUTRO).aggregate(monto_neutro=Sum('monto'))['monto_neutro'] or 0
         return monto_neutro
 
     def get_montos(self, obj):

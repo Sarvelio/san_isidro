@@ -8,6 +8,8 @@ import useList from "../../../hooks/useList";
 import useDelete from "../../../hooks/useDelete";
 import Search from "../../../components/Search/Search";
 import dayjs from "dayjs";
+import useGet from "../../../hooks/useGet";
+import { formatNumberMoney } from "../../../utils";
 
 export default function () {
   const { idProyecto } = useParams();
@@ -16,6 +18,12 @@ export default function () {
   const [search, setSearch] = useState(null);
   const loading = useSelector((state) => state.loading.loading);
   const navigate = useNavigate();
+  const { data: dataDetalles, getData: getDataDetalles } = useGet();
+
+  useEffect(() => {
+    getDataDetalles(`proyecto/${idProyecto}`);
+  }, []);
+
   const columns = useMemo(
     () => [
       {
@@ -39,7 +47,7 @@ export default function () {
       },
       {
         Header: "Monto",
-        accessor: "monto",
+        accessor: (a) => formatNumberMoney(a.monto),
       },
     ],
     []
@@ -47,8 +55,13 @@ export default function () {
 
   return (
     <>
-      <div className="flex mb-2 sm:mb-0">
+      <div className="mb-2 sm:mb-0">
         <h1 className="text-title">Detalles</h1>
+        <h1 className="text-title text-xl">{`Proyecto: ${dataDetalles?.nombre}`}</h1>
+        <h1 className="text-title text-xl">{`
+        Ingreso: ${formatNumberMoney(dataDetalles?.montos?.ingreso)}
+        Neutro: ${formatNumberMoney(dataDetalles?.montos?.neutro)}
+        Egreso: ${formatNumberMoney(dataDetalles?.montos?.egreso)} `}</h1>
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-20 mt-4">
         <Search

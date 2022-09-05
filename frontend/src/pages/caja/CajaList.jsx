@@ -14,12 +14,13 @@ import { useDispatch } from "react-redux";
 import _ from "lodash";
 import api from "api";
 import { toast } from "react-toastify";
+import { formatNumberMoney } from "../../utils";
 
 const mostrarMonto = (row, tipo_mov) => {
   if (row.tipo_movimiento_text === tipo_mov) {
-    return "Q " + row.monto;
+    return formatNumberMoney(row.monto);
   }
-  return "-";
+  return "";
 };
 
 export default function () {
@@ -103,7 +104,7 @@ export default function () {
                 Monto Ingresado
               </div>
               <span className="text-cyan-600 justify-self-end m-1 font-bold text-xl">
-                Q {dataCaja.monto_ingresado}
+                {formatNumberMoney(dataCaja?.monto_ingresado)}
               </span>
             </div>
           </div>
@@ -115,7 +116,7 @@ export default function () {
                 Monto Egresado
               </div>
               <span className="text-cyan-600 justify-self-end m-1 font-bold text-xl">
-                Q {dataCaja.monto_egresado}
+                {formatNumberMoney(dataCaja?.monto_egresado)}
               </span>
             </div>
           </div>
@@ -127,7 +128,7 @@ export default function () {
                 Monto Neutro
               </div>
               <span className="text-cyan-600 justify-self-end m-1 font-bold text-xl">
-                Q {dataCaja.monto_neutro}
+                {formatNumberMoney(dataCaja?.monto_neutro)}
               </span>
             </div>
           </div>
@@ -139,7 +140,7 @@ export default function () {
                 Monto disponible
               </div>
               <span className="text-cyan-600 justify-self-end m-1 font-bold text-xl">
-                Q {dataCaja.monto_disponible}
+                {formatNumberMoney(dataCaja?.monto_disponible)}
               </span>
             </div>
           </div>

@@ -8,6 +8,7 @@ import useList from "../../hooks/useList";
 import useDelete from "../../hooks/useDelete";
 import Search from "../../components/Search/Search";
 import dayjs from "dayjs";
+import { formatNumberMoney } from "../../utils";
 
 export default function () {
   const { data, page, getData } = useList("proyecto");
@@ -32,19 +33,19 @@ export default function () {
       },
       {
         Header: "Ingreso",
-        accessor: (row) => row.montos.ingreso,
+        accessor: (row) => formatNumberMoney(row.montos.ingreso),
       },
       {
         Header: "Egreso",
-        accessor: (row) => row.montos.egreso,
+        accessor: (row) => formatNumberMoney(row.montos.egreso),
       },
       {
         Header: "Neutro",
-        accessor: (row) => row.montos.neutro,
+        accessor: (row) => formatNumberMoney(row.montos.neutro),
       },
       {
         Header: "Total Costo",
-        accessor: (row) => row.montos.gasto,
+        accessor: (row) => formatNumberMoney(row.montos.gasto),
       },
       {
         Header: "Fecha Inicio y Fin",

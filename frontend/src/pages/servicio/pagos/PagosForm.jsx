@@ -30,6 +30,8 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import _ from "lodash";
 import api from "api";
+import useGet from "../../../hooks/useGet";
+import { formatNumberMoney } from "../../../utils";
 
 export default function PagosForm({
   onSubmit,
@@ -48,26 +50,11 @@ export default function PagosForm({
   } = useForm();
   const dispatch = useDispatch();
   const { idServicio } = useParams();
-  const [dataServicio, setDataServicio] = useState({});
   const watchMesesPagar = watch("meses_a_pagar");
-
-  const getDataServicio = async (id) => {
-    dispatch(setLoading(true));
-    try {
-      const data = await api.get(`servicio/${id}`);
-      setDataServicio(data);
-    } catch (e) {
-      let msj = "No se pudo obtener el registro";
-      if (e && e.detail) msj = e.detail;
-      else if (_.isArray(e)) msj = e[0];
-      toast.error(msj);
-    } finally {
-      dispatch(setLoading(false));
-    }
-  };
+  const { data: dataServicio, getData: getDataServicio } = useGet();
 
   useEffect(() => {
-    getDataServicio(idServicio);
+    getDataServicio(`servicio/${idServicio}`);
   }, []);
 
   useEffect(() => {
@@ -91,7 +78,7 @@ export default function PagosForm({
                     Costo del servicio por mes:
                   </label>
                   <div className="control">
-                    <p>Q {dataServicio?.costo_mensual}</p>
+                    <p>{formatNumberMoney(dataServicio?.costo_mensual)}</p>
                   </div>
                 </div>
               </div>
@@ -106,7 +93,11 @@ export default function PagosForm({
                     Total a pagar:
                   </label>
                   <div className="control">
-                    <p>Q {watchMesesPagar * dataServicio?.costo_mensual}</p>
+                    <p>
+                      {formatNumberMoney(
+                        watchMesesPagar * dataServicio?.costo_mensual
+                      )}
+                    </p>
                   </div>
                 </div>
               </div>
