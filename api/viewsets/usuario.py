@@ -23,7 +23,7 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
     filter_fields = ("nombre",)
-    search_fields = ("nombre",)
+    search_fields = ("nombres","apellidos","dpi", "telefono")
     ordering_fields = ("id", "nombre")
 
     def get_serializer_class(self):

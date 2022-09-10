@@ -20,6 +20,6 @@ class Usuario(BaseModel):
   nombres = models.CharField(max_length=250)
   apellidos = models.CharField(max_length=250)
   dpi = models.CharField(max_length=13, unique=True)
-  telefono = models.CharField(max_length=15, blank=True, null=True)
+  telefono = models.CharField(max_length=8, blank=True, null=True)
 
 

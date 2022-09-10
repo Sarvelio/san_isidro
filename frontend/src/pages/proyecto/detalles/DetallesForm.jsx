@@ -77,8 +77,16 @@ export default function DetallesForm({
               </div>
             ),
           },
-          { name: "descripcion", title: "Descripcion" },
-          { name: "monto", title: "Monto" },
+          {
+            name: "descripcion",
+            title: "Descripcion",
+            validations: ["required", "maxLength-250"],
+          },
+          {
+            name: "monto",
+            title: "Monto",
+            validations: ["required", "numerico"],
+          },
         ].map((props, index) => {
           return (
             <InputMasterField

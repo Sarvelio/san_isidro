@@ -52,9 +52,16 @@ export default function UserForm({
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="w-full flex flex-wrap">
         {[
-          { name: "first_name", title: "Nombre" },
-          { name: "last_name", title: "Apellido" },
-          { name: "birthday", title: "Fecha de Nacimiento", type: "date" },
+          {
+            name: "first_name",
+            title: "Nombre",
+            validations: ["required", "maxLength-150"],
+          },
+          {
+            name: "last_name",
+            title: "Apellido",
+            validations: ["required", "maxLength-150"],
+          },
           {
             name: "gender",
             title: "Género",
@@ -74,7 +81,7 @@ export default function UserForm({
           {
             name: "username",
             title: "Nombre de usuario",
-            validations: ["required", "alphanumeric"],
+            validations: ["required", "alphanumeric", "maxLength-150"],
           },
           {
             name: "email",

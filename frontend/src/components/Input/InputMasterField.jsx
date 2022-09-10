@@ -3,6 +3,7 @@ import {
   InputSelectField,
   InputTextField,
   InputDateField,
+  InputNumberField,
 } from "../../components/Input";
 import { InputTextArea } from "../CustomInputs";
 
@@ -14,6 +15,8 @@ const InputMasterField = ({
   type = "text",
   options = [],
   component = false,
+  prefix = "",
+  decimalScale = 0,
 }) => {
   if (component) {
     return component;
@@ -51,6 +54,19 @@ const InputMasterField = ({
     return (
       <div className="w-full sm:w-1/2 px-2 sm:px-6 py-1 ">
         <InputDateField name={name} title={title} control={control} />
+      </div>
+    );
+  } else if (type === "number") {
+    return (
+      <div className="w-full sm:w-1/2 px-2 sm:px-6 py-1 ">
+        <InputNumberField
+          name={name}
+          title={title}
+          control={control}
+          validations={validations}
+          prefix={prefix}
+          decimalScale={decimalScale}
+        />
       </div>
     );
   } else if (type === "textArea") {

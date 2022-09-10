@@ -65,7 +65,7 @@ class Detalle(BaseModel):
     'api.Servicio', on_delete=models.CASCADE, related_name='pagos', null=True, blank=True)
     anio = models.PositiveSmallIntegerField(blank=True, null=True)
     mes = models.PositiveSmallIntegerField(choices=MESES, blank=True, null=True)
-    descripcion = models.TextField(blank=True, null=True)
+    descripcion = models.CharField(max_length=250, blank=True, null=True)
 
     monto = models.FloatField()
 

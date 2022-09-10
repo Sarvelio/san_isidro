@@ -29,7 +29,6 @@ class UserReadSerializer(serializers.ModelSerializer):
             'username',
             'first_name',
             'last_name',
-            'birthday',
             'gender',
             'status',
             'status_text',

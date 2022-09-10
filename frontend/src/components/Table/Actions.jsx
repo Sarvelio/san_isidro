@@ -95,7 +95,7 @@ function Actions({
             onClick={detallesPagosAction}
             title="Detalle del pago"
           >
-            <MoneyIcon color="primary" />
+            <MoneyIcon color={row?.moroso ? "red" : "primary"} />
           </a>
         )}
       </div>

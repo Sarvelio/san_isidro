@@ -48,5 +48,6 @@ class Servicio(BaseModel):
 
     anio = models.SmallIntegerField()
     mes = models.PositiveSmallIntegerField(choices=MESES)
-    descripcion = models.TextField(blank=True, null=True)
+    descripcion = models.CharField(max_length=250, blank=True, null=True)
     sector = models.ForeignKey('api.Sector', on_delete=models.CASCADE, related_name='servicios')
+ 

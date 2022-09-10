@@ -68,7 +68,6 @@ class User(BaseModel, AbstractUser):
         (OTHER, 'Otro'),
     )
 
-    birthday = models.DateField()
     gender = models.PositiveSmallIntegerField(choices=GENDERS)
     telephone = models.CharField(max_length=15, blank=True, null=True)
     status = models.PositiveIntegerField(choices=TYPE_STATUS, default=INACTIVE)

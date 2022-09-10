@@ -7,6 +7,7 @@ import InputUpload from "./InputUpload";
 import InputDate from "./InputDate";
 import InputCheckBox from "./InputCheckBox";
 import InputPhoto from "./InputPhoto";
+import InputNumber from "./InputNumber";
 export {
   InputCheckBox,
   InputDate,
@@ -17,4 +18,5 @@ export {
   InputTextArea,
   InputUpload,
   InputPhoto,
+  InputNumber
 };

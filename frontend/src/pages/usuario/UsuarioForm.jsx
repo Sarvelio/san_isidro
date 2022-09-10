@@ -52,8 +52,16 @@ export default function UsuarioForm({
       <div className="w-full flex flex-wrap">
         {[
           { type: "title", title: "Datos Personales" },
-          { name: "nombres", title: "Nombre" },
-          { name: "apellidos", title: "Apellido" },
+          {
+            name: "nombres",
+            title: "Nombre",
+            validations: ["required", "maxLength-250"],
+          },
+          {
+            name: "apellidos",
+            title: "Apellido",
+            validations: ["required", "maxLength-250"],
+          },
           {
             name: "genero",
             title: "Género",
@@ -65,10 +73,12 @@ export default function UsuarioForm({
           {
             name: "dpi",
             title: "DPI",
+            validations: ["required", "validacion-dpi", "numerico"],
           },
           {
             name: "telefono",
             title: "Teléfono",
+            validations: ["required", "validacion-8", "numerico"],
           },
         ].map((props, index) => {
           return (

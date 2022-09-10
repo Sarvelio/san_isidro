@@ -149,17 +149,8 @@ export default function () {
       <div className="flex mb-2 sm:mb-0 mt-12">
         <h1 className="text-title">Caja</h1>
       </div>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-20 mt-4">
-        <Search
-          className="w-full"
-          onSearch={(value) => {
-            getData(1, {
-              search: value,
-            }).then();
-            setSearch(value);
-          }}
-        />
-        <div className="flex justify-start sm:justify-end">
+      <div className=" h-full sm:gap-20 mt-4">
+        <div className="flex justify-end">
           <Button
             component={RouterLink}
             disableElevation

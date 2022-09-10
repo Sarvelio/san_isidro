@@ -17,12 +17,12 @@ from api.serializers import DetalleBaseSerializer, DetalleReadSerializer, Detall
 
 class PagoViewSet(viewsets.ModelViewSet):
     serializer_class = DetalleReadSerializer
-    queryset = Detalle.objects.filter(active=True, tipo_detalle=Detalle.PAGO)
+    queryset = Detalle.objects.filter(active=True, tipo_detalle=Detalle.PAGO).order_by('-created')
 
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
     filterset_fields = ('servicio',)
-    search_fields = ("descripcion",)
+    search_fields = ("descripcion","anio","mes")
     ordering_fields = ("id", "descripcion")
 
     def get_serializer_class(self):

@@ -43,7 +43,12 @@ export default function () {
       },
       {
         Header: "Fecha Solvente",
-        accessor: "fecha_solvente",
+        accessor: (a) =>
+          a.moroso ? (
+            <span className="  fa-bold text-red-500">{a.fecha_solvente}</span>
+          ) : (
+            <span>{a.fecha_solvente}</span>
+          ),
       },
     ],
     []

@@ -1,6 +1,7 @@
 import React from "react";
 import ButtonUi from "../UI";
 import { useNavigate } from "react-router-dom";
+import { SwalWarning } from "../SwalAlerts";
 
 const FormFooter = ({
   errorData,
@@ -8,9 +9,24 @@ const FormFooter = ({
   loading,
   urlList,
   setOpen,
+  onClick,
+  validar = false,
   onlyRead = false,
 }) => {
   const navigate = useNavigate();
+
+  const validarAccion = () => {
+    SwalWarning(
+      "¿Estas seguro de realizar el pago?",
+      "¡No podrá revertir esta acción!",
+      "¡Sí, pagar!",
+      "No, cancelar"
+    ).then((result) => {
+      if (result.value) {
+        onClick();
+      }
+    });
+  };
 
   return (
     <div className="my-4 sm:mt-10">
@@ -27,7 +43,7 @@ const FormFooter = ({
           onClick={() => {
             setOpen(true);
           }}
-        >
+        > 
           Eliminar registro
         </button>
       )} */}
@@ -46,7 +62,16 @@ const FormFooter = ({
           </ButtonUi>
         </div>
         <div className="mx-2 sm:px-4 sm:inline-block contents">
-          {!onlyRead && (
+          {!onlyRead && validar ? (
+            <ButtonUi
+              type="button"
+              disabled={loading}
+              onClick={validarAccion}
+              button="primary"
+            >
+              {isUpdating ? "Editar" : "Registrar"}
+            </ButtonUi>
+          ) : (
             <ButtonUi type="submit" disabled={loading} button="primary">
               {isUpdating ? "Editar" : "Registrar"}
             </ButtonUi>

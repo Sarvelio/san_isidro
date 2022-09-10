@@ -5,7 +5,6 @@ import Table, { tableActions } from "../../../components/Table";
 import LoadMask from "../../../components/LoadMask";
 import Button from "@mui/material/Button";
 import useList from "../../../hooks/useList";
-import useDelete from "../../../hooks/useDelete";
 import Search from "../../../components/Search/Search";
 import useGet from "../../../hooks/useGet";
 import { formatNumberMoney } from "../../../utils";
@@ -13,35 +12,26 @@ import { formatNumberMoney } from "../../../utils";
 export default function () {
   const { idServicio } = useParams();
   const { data, page, getData } = useList("pagos", { servicio: idServicio });
-  const { deleteData } = useDelete("pagos");
   const [search, setSearch] = useState(null);
   const loading = useSelector((state) => state.loading.loading);
-  const navigate = useNavigate();
   const { data: dataServicio, getData: getDataServicio } = useGet();
 
   const columns = useMemo(
     () => [
       {
-        Header: "Herramientas",
-        accessor: tableActions({
-          edit: (id) => navigate(`/servicio/${idServicio}/pagos/${id}`),
-          remove: (id) => deleteData(id, () => getData(1, { search: search })),
-        }),
-      },
-      {
-        Header: "mes",
+        Header: "Mes",
         accessor: "mes_text",
       },
       {
-        Header: "año",
+        Header: "Año",
         accessor: "anio",
       },
       {
-        Header: "descripcion",
+        Header: "Descripcion",
         accessor: "descripcion",
       },
       {
-        Header: "monto",
+        Header: "Monto",
         accessor: (a) => formatNumberMoney(a.monto),
       },
     ],
@@ -57,7 +47,11 @@ export default function () {
       <div className="mb-2 sm:mb-0">
         <h1 className="text-title">Detalles del pago</h1>
         <h1 className="text-title text-xl">{`Nombre: ${dataServicio?.usuario?.nombres} ${dataServicio?.usuario?.apellidos}, DPI:${dataServicio?.usuario?.dpi}`}</h1>
-        <h1 className="text-title text-xl">{`Fecha Solvente, ${dataServicio.fecha_solvente}`}</h1>
+        <h1
+          className={`text-title text-xl ${
+            dataServicio.moroso ? "text-red-500" : ""
+          }`}
+        >{`Fecha Solvente, ${dataServicio.fecha_solvente}`}</h1>
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-20 mt-4">
         <Search

@@ -13,7 +13,7 @@ class Proyecto(BaseModel):
                       (OTROS, 'Otros proyectos'))
 
     nombre = models.CharField(max_length=250)
-    descripcion = models.TextField()
+    descripcion = models.CharField(max_length=250, blank=True, null=True)
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     tipo = models.IntegerField(choices=TIPOS_PROYECTO, default=AGUA)

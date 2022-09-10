@@ -20,7 +20,7 @@ class ProyectoViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
     filter_fields = ("nombre",)
-    search_fields = ("nombre",)
+    search_fields = ("nombre","descripcion")
     ordering_fields = ("id", "nombre")
 
     def get_serializer_class(self):

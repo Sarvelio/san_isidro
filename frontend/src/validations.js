@@ -70,18 +70,46 @@ export function greaterThenToday(value) {
   return null;
 }
 
+export function minValue(min) {
+  return (value) => {
+    if (!isEmpty(value) && value < min) {
+      return `El valor debe ser mayor a ${min}.`;
+    }
+
+    return null;
+  };
+}
+
+export function maxValue(max) {
+  return (value) => {
+    if (!isEmpty(value) && value > max) {
+      return `El valor debe ser mayor a ${max}.`;
+    }
+
+    return null;
+  };
+}
+
 export const composeValidators =
   (...validators) =>
-  (value) =>
-    validators.reduce(
-      (error, validator) => error || validator(value),
-      undefined
-    );
+    (value) =>
+      validators.reduce(
+        (error, validator) => error || validator(value),
+        undefined
+      );
 
 export function alphanumeric(value) {
   const regularExpression = /^[a-z0-9]+$/i;
   if (!isEmpty(value) && !regularExpression.test(value)) {
     return "Este campo solo debe contener números y letras";
+  }
+  return null;
+}
+
+export function soloNumeros(value) {
+  const regularExpression = /^[0-9]+$/i;
+  if (!isEmpty(value) && !regularExpression.test(value)) {
+    return "Este campo solo debe contener números";
   }
   return null;
 }

@@ -14,7 +14,6 @@ export default function User() {
 
   const onSubmit = async (data) => {
     const body = { ...data };
-    body.birthday = dayjs(data.birthday).format("YYYY-MM-DD");
     delete body.rol;
     delete body.password;
     if (_.get(data, "rol", undefined) !== undefined) {

@@ -84,7 +84,11 @@ export default function PagosForm({
               </div>
             ),
           },
-          { name: "meses_a_pagar", title: "¿Cuantos meses va a pagar?" },
+          {
+            name: "meses_a_pagar",
+            title: "¿Cuantos meses va a pagar g?",
+            validations: ["required", "validacion-2", "numerico"],
+          },
           {
             component: (
               <div className="w-full sm:w-1/2 px-2 sm:px-6">
@@ -103,7 +107,11 @@ export default function PagosForm({
               </div>
             ),
           },
-          { name: "descripcion", title: "Descripción" },
+          {
+            name: "descripcion",
+            title: "Descripción",
+            validations: ["required", "maxLength-250"],
+          },
         ].map((props, index) => {
           return (
             <InputMasterField
@@ -114,7 +122,16 @@ export default function PagosForm({
           );
         })}
       </div>
-      <FormFooter {...{ loading, isUpdating, urlList }} />
+
+      <FormFooter
+        {...{
+          loading,
+          isUpdating,
+          urlList,
+          // validar: true,
+          // onClick: handleSubmit(onSubmit),
+        }}
+      />
       <br />
     </form>
   );

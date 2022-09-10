@@ -21,7 +21,7 @@ class DetalleViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
     filterset_fields = ('proyecto',)
-    search_fields = ("descripcion")
+    search_fields = ("descripcion","anio","mes","monto")
     ordering_fields = ("id", "descripcion")
 
     def get_serializer_class(self):
