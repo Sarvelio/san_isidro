@@ -14,7 +14,7 @@ import { formatNumberMoney } from "../../../utils";
 export default function () {
   const { idProyecto } = useParams();
   const { data, page, getData } = useList("detalles", { proyecto: idProyecto });
-  const { deleteData } = useDelete("detalles");
+  const { deleteData } = useDelete("detalles", "/proyecto");
   const [search, setSearch] = useState(null);
   const loading = useSelector((state) => state.loading.loading);
   const navigate = useNavigate();
@@ -30,6 +30,7 @@ export default function () {
         Header: "Herramientas",
         accessor: tableActions({
           edit: (id) => navigate(`/proyecto/${idProyecto}/detalles/${id}`),
+          remove: (id) => deleteData(id, () => getData(1, { search: search })),
         }),
       },
       {
