@@ -55,7 +55,7 @@ export default function SideBar({ className }) {
               location={location}
             />
             <MenuItem
-              title="Usuarios"
+              title="Usuarios Sistema"
               to="/user"
               Icon={() => <PeopleIcon />}
               user={user}
@@ -69,7 +69,7 @@ export default function SideBar({ className }) {
               location={location}
             />
             <MenuItem
-              title="Usuarios"
+              title="Clientes"
               to="/usuario"
               Icon={() => <ConstructionIcon />}
               user={user}

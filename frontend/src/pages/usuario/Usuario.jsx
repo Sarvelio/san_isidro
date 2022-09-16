@@ -20,7 +20,7 @@ export default function Usuario() {
   return (
     <>
       <div>
-        <h1 className="text-title mb-4">Persona</h1>
+        <h1 className="text-title mb-4">Cliente</h1>
       </div>
       <LoadMask loading={loading}>
         <UsuarioForm

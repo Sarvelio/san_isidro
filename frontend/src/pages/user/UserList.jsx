@@ -55,7 +55,7 @@ export default function () {
   return (
     <>
       <div className="flex mb-2 sm:mb-0">
-        <h1 className="text-title">Usuarios</h1>
+        <h1 className="text-title">Usuarios del Sistema</h1>
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-20 mt-4">
         <Search
