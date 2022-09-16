@@ -16,8 +16,12 @@ import ProyectoRoutes from "./proyecto";
 import Configuracion from "./configuracion/Configuracion";
 import ServicioRoutes from "./servicio";
 import CajaRoutes from "./caja";
+import useAccount from "../hooks/useAccount";
+import { useEffect } from "react";
 
 export default function App() {
+  const { user } = useAccount();
+
   return (
     <>
       <Routes>
@@ -30,14 +34,27 @@ export default function App() {
             </PrivateRoute>
           }
         />
-        <Route
-          path="/user/*"
-          element={
-            <PrivateRoute>
-              <UserRoutes />
-            </PrivateRoute>
-          }
-        />
+        {user.rol == 1 && (
+          <>
+            <Route
+              path="/user/*"
+              element={
+                <PrivateRoute>
+                  <UserRoutes />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/configuracion/:id"
+              element={
+                <PrivateRoute>
+                  <Configuracion />
+                </PrivateRoute>
+              }
+            />
+          </>
+        )}
+
         <Route
           path="/sector/*"
           element={
@@ -67,14 +84,6 @@ export default function App() {
           element={
             <PrivateRoute>
               <ServicioRoutes />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/configuracion/:id"
-          element={
-            <PrivateRoute>
-              <Configuracion />
             </PrivateRoute>
           }
         />

@@ -11,12 +11,14 @@ from api.models import Sector
 
 # Serializer
 from api.serializers import SectorBaseSerializer, SectorReadSerializer, SectorSaveSerializer
-
+from api.permissions.user import UserCajeroAdminPermissions
+from rest_framework.permissions import IsAuthenticated
 
 class SectorViewSet(viewsets.ModelViewSet):
     serializer_class = SectorReadSerializer
     queryset = Sector.objects.filter(active=True)
-
+    permission_classes = [IsAuthenticated, UserCajeroAdminPermissions]
+    
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
     filter_fields = ("nombre",)

@@ -10,11 +10,12 @@ from rest_framework.decorators import action
 
 # Models
 from api.models import Detalle
+from api.permissions.user import UserCajeroAdminPermissions
+from rest_framework.permissions import IsAuthenticated
 
 # Serializer
 from api.serializers import DetalleBaseSerializer, DetalleReadSerializer, DetalleSaveSerializer
 
-from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.db.models import Sum
 from django.db.models.functions import Coalesce
 
@@ -22,8 +23,7 @@ from django.db.models.functions import Coalesce
 class CajaViewSet(viewsets.ModelViewSet):
     serializer_class = DetalleReadSerializer
     queryset = Detalle.objects.filter(active=True).order_by('-created')
-
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated, UserCajeroAdminPermissions]
 
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)

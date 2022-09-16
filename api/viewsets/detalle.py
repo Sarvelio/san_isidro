@@ -14,9 +14,12 @@ from api.models import Detalle
 from api.serializers import DetalleBaseSerializer, DetalleReadSerializer, DetalleSaveSerializer
 
 
+from api.permissions.user import UserCajeroAdminPermissions
+from rest_framework.permissions import IsAuthenticated
 class DetalleViewSet(viewsets.ModelViewSet):
     serializer_class = DetalleReadSerializer
     queryset = Detalle.objects.filter(active=True, tipo_detalle=Detalle.PROYECTO).order_by('-created')
+    permission_classes = [IsAuthenticated, UserCajeroAdminPermissions]
 
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)

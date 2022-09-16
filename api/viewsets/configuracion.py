@@ -12,9 +12,11 @@ from api.models import Configuracion
 # Serializer
 from api.serializers import  ConfiguracionReadSerializer, ConfiguracionSaveSerializer
 
-
+from api.permissions.user import UserAdminPermissions
+from rest_framework.permissions import IsAuthenticated
 class ConfiguracionViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
     queryset = Configuracion.objects.filter(active=True)
+    permission_classes = [IsAuthenticated, UserAdminPermissions]
     
     def retrieve(self, request, *args, **kwargs):
         config = Configuracion.objects.all().last()

@@ -14,11 +14,14 @@ from api.models import Detalle, Servicio, Configuracion
 # Serializer
 from api.serializers import DetalleBaseSerializer, DetalleReadSerializer, DetalleSaveSerializer
 
+from api.permissions.user import UserCajeroAdminPermissions
+from rest_framework.permissions import IsAuthenticated
 
 class PagoViewSet(viewsets.ModelViewSet):
     serializer_class = DetalleReadSerializer
     queryset = Detalle.objects.filter(active=True, tipo_detalle=Detalle.PAGO).order_by('-created')
-
+    permission_classes = [IsAuthenticated, UserCajeroAdminPermissions]
+    
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
     filterset_fields = ('servicio',)

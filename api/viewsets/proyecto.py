@@ -12,11 +12,15 @@ from api.models import Proyecto
 # Serializer
 from api.serializers import ProyectoBaseSerializer, ProyectoReadSerializer, ProyectoSaveSerializer
 
+from api.permissions.user import UserCajeroAdminPermissions
+from rest_framework.permissions import IsAuthenticated
+    
+
 
 class ProyectoViewSet(viewsets.ModelViewSet):
     serializer_class = ProyectoReadSerializer
     queryset = Proyecto.objects.filter(active=True).order_by('-created')
-
+    permission_classes = [IsAuthenticated, UserCajeroAdminPermissions]
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
     filter_fields = ("nombre",)

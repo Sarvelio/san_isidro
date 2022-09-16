@@ -14,11 +14,13 @@ from api.models import Servicio, Detalle,Proyecto
 
 # Serializer
 from api.serializers import ServicioBaseSerializer, ServicioReadSerializer, ServicioSaveSerializer
-
+from api.permissions.user import UserCajeroAdminPermissions
+from rest_framework.permissions import IsAuthenticated
 
 class ServicioViewSet(viewsets.ModelViewSet):
     serializer_class = ServicioReadSerializer
     queryset = Servicio.objects.filter(active=True).order_by('-created')
+    permission_classes = [IsAuthenticated, UserCajeroAdminPermissions]
 
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)

@@ -7,6 +7,7 @@ import LockIcon from "@mui/icons-material/Lock";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
 import "./sidebar.css";
+import { useEffect } from "react";
 
 function MenuItem({ Icon, title, to, user, allowTo = [], location }) {
   const onClickItem = () => {
@@ -54,13 +55,15 @@ export default function SideBar({ className }) {
               Icon={() => <HomeIcon />}
               location={location}
             />
-            <MenuItem
-              title="Usuarios Sistema"
-              to="/user"
-              Icon={() => <PeopleIcon />}
-              user={user}
-              location={location}
-            />
+            {user.rol == 1 && (
+              <MenuItem
+                title="Usuarios Sistema"
+                to="/user"
+                Icon={() => <PeopleIcon />}
+                user={user}
+                location={location}
+              />
+            )}
             <MenuItem
               title="Sectores"
               to="/sector"
@@ -96,13 +99,15 @@ export default function SideBar({ className }) {
               user={user}
               location={location}
             />
-            <MenuItem
-              title="Configuración"
-              to="/configuracion/1"
-              Icon={() => <ConstructionIcon />}
-              user={user}
-              location={location}
-            />
+            {user.rol == 1 && (
+              <MenuItem
+                title="Configuración"
+                to="/configuracion/1"
+                Icon={() => <ConstructionIcon />}
+                user={user}
+                location={location}
+              />
+            )}
             <li className="menu-item my-2 mt-36" onClick={() => {}}>
               <div className="menu-link" onClick={logOut}>
                 <DoorBackIcon />

@@ -22,7 +22,7 @@ export default function Upload(props) {
     } else if (props.file === null || props.file === undefined) {
       setSrcFile(undefined);
     }
-  }; 
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -39,7 +39,6 @@ export default function Upload(props) {
     try {
       setLoading(true);
       file = file || e.target.files[0];
-      console.log("llego aqui");
       const fileType = ".jpg|.jpeg|.png";
       if (file && !!file.type.match(fileType)) {
         props.onChange(file);
