@@ -24,7 +24,7 @@ class UserCajeroAdminPermissions(BasePermission):
     def has_permission(self, request, view):
         user = request.user
 
-        if  view.action is not "destroy" and user.rol == User.CAJERO:
+        if  view.action != "destroy" and user.rol == User.CAJERO:
             return True
         if user.rol == User.ADMINISTRADOR:
             return True
