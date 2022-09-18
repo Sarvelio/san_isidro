@@ -16,6 +16,7 @@ from api.serializers import UsuarioBaseSerializer, UsuarioReadSerializer, Usuari
 from api.serializers.servicio import ServicioReadSerializer
 from api.permissions.user import UserCajeroAdminPermissions
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import ValidationError
 
 class UsuarioViewSet(viewsets.ModelViewSet):
     serializer_class = UsuarioReadSerializer
@@ -41,7 +42,13 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         user = request.user.id
         data = request.data
-        data['createdBy'] = user # user who created the record 
+        dpi_existente= data.get('dpi', None)
+
+        if dpi_existente.isspace():
+            raise ValidationError('El DPI está en blanco')
+        if Usuario.objects.filter(dpi=dpi_existente.strip()).exists():
+            raise ValidationError('El DPI ya existe.')
+        data['createdBy'] = user
 
         with transaction.atomic():
             serializer = self.get_serializer(data=data)
