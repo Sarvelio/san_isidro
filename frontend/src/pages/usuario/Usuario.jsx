@@ -9,11 +9,12 @@ import _ from "lodash";
 export default function Usuario() {
   const urlList = "/usuario";
   const { saveData } = useCreate("usuario", urlList);
-  const { data, updateData, update } = useUpdate("usuario", urlList);
+  const { data, updateData, update, setData } = useUpdate("usuario", urlList);
   const loading = useSelector((state) => state.loading.loading);
 
   const onSubmit = async (data) => {
     const body = { ...data };
+    setData(body);
     if (!update) saveData(body);
     else updateData(body);
   };
