@@ -25,9 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9dg9i6ku0x!7snw!0h)l#9pgb+)2mllb51tvv9f51q*#oa^tf9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'https://san-isidro.vercel.app', 'san-isidro.vercel.app',
+                 'gerardy13.pythonanywhere.com']
 
 
 # Application definition
