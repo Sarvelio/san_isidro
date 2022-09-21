@@ -1,0 +1,21 @@
+{
+    "rewrites": [
+        {
+            "source": "/api/:path*",
+            "destination": "https://gerardy13.pythonanywhere.com/api/:path*"
+        },
+        {
+            "source": "/api/:path*/",
+            "destination": "https://gerardy13.pythonanywhere.com/api/:path*/"
+        },
+        {
+            "source": "/api/:path*",
+            "destination": "https://gerardy13.pythonanywhere.com/media/:path*"
+        },
+        {
+            "source": "/api/:path*/",
+            "destination": "https://gerardy13.pythonanywhere.com/media/:path*/"
+        },
+        { "source": "/(.*)", "destination": "/index.html" }
+    ]
+}
