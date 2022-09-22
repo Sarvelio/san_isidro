@@ -18,7 +18,7 @@ export default function Login() {
       <LoadMask loading={loading}>
         <div className="h-screen flex flex-col items-center justify-center relative">
           <div className="bg-white border-l-4 border-t-2 rounded-lg shadow-xl py-10 px-5 border-solid">
-            <h2 className="text-center text-title">Maywi</h2>
+            <h2 className="text-center text-lg">Sistema de agua potable</h2>
             <br />
             <form
               onSubmit={handleSubmit(onSubmit)}
